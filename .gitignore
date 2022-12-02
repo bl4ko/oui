@@ -1,5 +1,6 @@
 .vscode
 .DS_Store
 cheatsheet.*
-!cheatsheet.text
+!cheatsheet.tex
+!cheatsheet.pdf
 

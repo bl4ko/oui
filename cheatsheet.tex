@@ -1,0 +1,92 @@
+\documentclass[landscape,a4paper]{article}
+% Minimal Font Size
+\usepackage{lmodern}
+\usepackage{scrextend}
+\changefontsizes[10pt]{7pt}
+% ----------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[LY1,T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage[nosf]{kpfonts}
+\usepackage[t1]{sourcesanspro}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage[top=2mm,bottom=2mm,left=2mm,right=2mm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+\usepackage{pdfpages}
+\usepackage{enumitem} % itemize without indentation
+\usepackage{array} %table
+\usepackage{lipsum}
+\usepackage{multicol}
+\usepackage{easytable}
+\setlength{\columnseprule}{0.4pt} % lines between columns
+\usepackage{listings} % https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+\usepackage{color}
+\usepackage{blkarray} %https://tex.stackexchange.com/questions/59517/label-rows-of-a-matrix-by-characters
+\usepackage{graphicx} % Images in doccument
+\usepackage{tabularx}
+\graphicspath{ {./images/} }
+
+% \titleformat{\subsubsection}
+% {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% https://tex.stackexchange.com/questions/119866/whats-a-good-way-to-insert-very-few-lines-of-code
+\definecolor{green}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{light_orange}{RGB}{221,117,56}
+% https://tex.stackexchange.com/questions/401750/quick-and-short-command-for-coloring-one-word
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\yellow}[1]{\textcolor{yellow}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\purple}[1]{\textcolor{purple}{#1}}
+
+% size of titles https://tex.stackexchange.com/questions/59726/change-size-of-section-subsection-subsubsection-paragraph-and-subparagraph-ti
+\usepackage{titlesec}
+\titleformat{\section}
+{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+
+% -- Titles ----------------------------------------------------------
+\titleformat*{\section}{\scshape\large\bfseries\color{red}}
+\titleformat*{\subsection}{\scshape\normalsize\bfseries\color{orange}}
+\titleformat*{\subsubsection}{\scshape\small\bfseries\color{light_orange}}
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\titlespacing*{\section}{0pt}{0px}{0px}
+\titlespacing*{\subsection}{0pt}{0px}{0px}
+\titlespacing*{\subsubsection}{0pt}{0px}{0px}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\begin{document}
+\begin{multicols*}{4}
+    \input{snovi/00_Uvod.tex}
+    \input{snovi/01_Strojno-ucenje.tex}
+    \input{snovi/02_Preiskovanje-grafov.tex}
+\end{multicols*}
+\end{document}
