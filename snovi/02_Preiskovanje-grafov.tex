@@ -1,0 +1,188 @@
+\section{Preiskovanje}
+
+\subsection{Neinformirani preiskovalni algoritmi}
+
+\subsubsection{Iskanje v sirino}
+
+\subsubsection{iskanje v globino}
+
+Izboljsave:
+\begin{itemize}
+    \item \textbf{Iskanje s sestopanjem}
+    \item \textbf{depth-limited-search} (vnapej definiramo globino l (dolocimo preko domenskega znanja))
+\end{itemize}
+
+\subsubsection{iterativno poglabljanje}
+problem gobinsko omejenega iskanja -> nastavitev meje l
+Mejo l postopoma povecujemo za 1, dokler ne najdemo resitve.
+% itemize without spacing
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item \textbf{popolnost}: Da
+    \item \textbf{optimalnost}: Da
+    \item \textbf{casovna zahtevnost} $O(b^d)$
+    \item \textbf{prostorska zahtevnost} $O(bd)$
+\end{itemize}
+Boljse od iskanja v globino/sirino
+
+\subsubsection{dvosmerno iskanje}
+Ideja: pognati vzporedni iskanji od zacetka do cilja in od cilja do zacetka.\\
+Motivacija: \\ 
+
+\textbf{Implemenatcija dvosmernega iskanja}
+
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item ciljno vozlisce mora biti znano
+    \item originalni problemski prostor preslikamo v dvosmerni prosto stanj
+    E1, E2 dosegljiv iz E in S1,S2,S3 dosegljiv iz S
+    (S,E) -> {(S1, E1), (S1,E2), (S2, E1), (S2, E2)...}
+    Vozlisce (Si, Ei) je v dvosmernem prostur ciljo vozlisce ce velja E=S (soda dolzina na isto mesto pridemo iz obeh strani) ali S->E (liha pot sosednja)
+\end{itemize}
+
+\subsubsection{cenovno - optimalno iskanje}
+\begin{itemize}[noitemsep,leftmargin=*,topsep=0pt]
+    \item posplositev iskanja v sirino (iskanje v sirino je optimalno, ce so cene vseh povezav enake 1)\\
+    \item dijkstra basically (sam do zadnga noda)
+    \item https://stackoverflow.com/a/14587449
+\end{itemize}
+
+
+\subsubsection{Primerjava algoritmov}
+
+$$
+\begin{array}{|c|c|c|c|c|c|}
+   \hline 
+   \text{Kriterij} & \text{sirino} & \text{globino} & \text{omejitvijo globine} & \text{iterativno poglabljanje} & \text{dvosmerno iskanje}\\
+   \hline
+\end{array}
+$$
+
+
+\subsection{Informirani preiskovalni algoritmi}
+
+\subsubsection{hevristicno preiskovanje}
+ideja: preiskovanje usmerjamo z dodatnim znanjem (ocenitven funcija za obetavnost vozlisca)\\
+\textbf{hevristika} je ocenitvena funkcija za obetavnost vozlisca\\
+Niso optimalni algoritmi (ne zagotavljajo optimalnih resitev)\\
+
+Primeri hev. algoritmov:
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item A*
+    \item IDA*
+    \item RBFS (recursive best-first search)
+    \item iskanje v snopu (beam search)
+    \item plezanje na hrib (hill climbing)
+\end{itemize}
+
+
+\subsubsection{pozresno preiskovanje/ greedy best-first search}
+$h(n)$ hevristicna ocena\\
+vrednotenje vozlisca $f(n)=h(n)$
+hevristicna ocena ... npr manhattan distance (zracna razdalja)
+
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item \textbf{popolnost} (ali najde vedno resitev): Ne
+    \item \textbf{optimalnost}: Ne
+    \item \textbf{casovna zahtevnost} $O(b^m)$, kjer je m najvecja globina drevesa
+\end{itemize}
+
+\subsubsection{A*}
+Ideja: boljsa hevrisiticna fun\\
+Vozlisca vrednotimo glede na ceno najboljse poti skozi vozlisce n\\
+$f(n)=g(n)+h(n)$, $g(n)$ cena poti do n (znano), $h(n)$ cena od n do najblizjega cilja (ocena)\\
+\textbf{prioritetna vrsta} (max glede na f(n))
+Basically dijkstra + h(n) (A* is basically an informed variation of Dijkstra.
+)
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item \textbf{popolnost}: Da (ce ustreza pogoju \underline{dopustnosti})
+    \item \textbf{optimalnost}: Da (ce ustreza pogoju \underline{dopustnosti}) 
+    \item \textbf{casovna zahtevnost} $O(b^m)$, kjer je m najvecja globina drevesa
+\end{itemize}
+
+h(n) je \textbf{dopustna} ce nikoli \textbf{ne precenjuje cene do cilja}\\
+- hevristika optimisticna predvideva da je do cilja manj kot dejansko je (zracna razdalja, igra 8 ploscic)\\
+- $\forall h(n)\leq h*(n)$, kjer je $h*(n)$ dejanska cena optimalne poti do cilja za vozlisce n
+- h(n) = 0 (A* = dijkstra), preiskovanje s cenami, velja da je sevedno optimalen
+
+
+\subsubsection{IDA* (Iterative deepening A*)}
+Deluje kot \textbf{dfs}, vendar za mejo uporabljamo \textbf{f(n)} namest globine
+- za mejo na zacetku izberemo vrednost f(n) zacetnega v
+- na vsaki iteraciji razvijemo vsa vozlisca z f(n) <= mejni vrednosti
+- za naslednjo iteracijo izberemo mejo, ki je najmanjsi f(n) od se nerazvitih vozlisc
+
+\includegraphics[width=6cm]{./images/ida*.png}
+
+\textbf{Ucinkovitost}
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item neucinkovit ce vozlisca raznolika f(n)
+    \item prednost: ne hrani vec vseh vozlisc kot A*
+    \item optimalen: ce razvija v prioritetnem vrsntem redu, h(n) mora biti \textbf{monotona|konsistentna} (h(n) skos pada) (posledicno tudi dopustna) $$h(n) \leq c(n,n') + h(n')$$ (h naslednjega vozlisca manjsi ker je blizji cilja)
+    \item $\text{monotona} \rightarrow \text{dopustna}$ (proti primer h(n) = 0)
+\end{itemize}
+
+
+\subsubsection{Kakovost hevristicnih funkcij}
+$$\begin{array}{|c|c|c|}
+    \hline
+    7 & 2 & 4 \\
+    \hline 
+    5 & & 6 \\
+    \hline 
+    8 & 3 & 1 \\
+    \hline 
+\end{array}\\$$
+Primer igra 8 ploscic\\
+-$h_1$: stevilo ploscic ki niso na pravem mestu (8)\\
+-$h_2$: vsota manhattanskih razdalj ploscic do pravega mesta(3+1+2+2+2+3+3+2=18)\\
+Kakovost h ocenimo z:\\
+- stevilom generirarnih vozlisc\\
+- z efektivnim faktorjem vejanja (koliko vozlisc N je algoritem generiral da je na globini d nasel resitev)\\
+
+\includegraphics[width=6cm]{./images/kakovost-h(n).png}
+
+Vidimo $h_2(n) \geq h_1(n) \forall n$ pravimo $h_2$ \textbf{dominira} $h_1$\\
+
+
+\subsection{Lokalno preiskovalni algoritmi}
+
+\subsubsection{Plezanje na hrib}
+Ne pomnemo poti do cilja, ampak samo trenutno stanje\\
+Koristni v primerih:\\
+- ce nas zanima samo kakovost resitve (in ne pot do cilja)\\
+- resevanje optimizacijskih problemov (kjer je podana \textbf{kriterijska funkcija} za oceno kakovosti resitve)\\
+
+Prednosti:\\
+- majhna poraba prostora\\
+
+\textbf{Primer 4 kraljice na sahovnici}
+- kriterijska funkcija: maksimiziramo - (minus) stevilo kraljic, ki se medsebojno napadajo
+
+Tezave:
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item lokalni maksimumi
+    \item "rame, plaote" (kriterijska funkcija konstantna vrednost)
+    \item grebeni (za plezanje navzgor je potreben sestop po pobocju grebena)
+\end{itemize}
+
+Resevanje iz lokalnih maksimumov:
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item \textbf{koraki vstran}: ce ima naslednje stanje isto vrednost kriterijske funkcie, dovolimo premik v to stanje
+    \item \textbf{stohasticno} plezanje na hrib: iz mnozice boljsih stanj, verjetnostno izberemo naslednje stanje (pri cemer upostevamo da imajo boljsa stanja vecjo verjetnost izbora)
+    \item \textbf{nakljucni ponovni zagon}: veckrat pozeni plezanje na hrib iz nakljucnih stanj dokler ne najdes resitve
+\end{itemize}
+
+\subsubsection{Simulirano ohlajanje}
+algoritem ki izvira iz metalurgije (ko je jeklo tekoce, so molekule v njem bolj gibljive; ko se ohlaja se strjuje in molekuele se umirjajo)
+Analogija:\\
+- generiramo nakljucne sosede trenutnega stanja\\
+- ce najdemo \textbf{boljse stanje ga izberemo}\\
+- ce najdemo \textbf{slabse stanje, ga izberemo z doloceno verjetnostjo}\\
+- verjetnost izbire neoptimalnega stanja s casom pada (nizanje temperature)
+
+\subsubsection{Lokalno iskanje v snopu}
+Algoritem:\\
+- v spominu hrani k aktualnih stanj namesto enega\\
+- izberi k optimalnih stanj od sosedov aktualnih stanj\\
+- ponavaljaj do ustavitnega pogoja 
+
+\subsection{Grafi AND/OR, nedeterministicno okolje}
