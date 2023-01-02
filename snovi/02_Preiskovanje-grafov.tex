@@ -62,16 +62,9 @@ $$
 \subsubsection{hevristicno preiskovanje}
 ideja: preiskovanje usmerjamo z dodatnim znanjem (ocenitven funcija za obetavnost vozlisca)\\
 \textbf{hevristika} je ocenitvena funkcija za obetavnost vozlisca\\
-Niso optimalni algoritmi (ne zagotavljajo optimalnih resitev)\\
-
-Primeri hev. algoritmov:
-\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item A*
-    \item IDA*
-    \item RBFS (recursive best-first search)
-    \item iskanje v snopu (beam search)
-    \item plezanje na hrib (hill climbing)
-\end{itemize}
+- \green{optimisticna/dopustna}: $h(n) \leq h^*(n)$ ($h^*$ je optimalna ocena)\\
+- \green{optimalna}: $h(n) = h^*(n)$\\
+- \green{pesimisticna}: $h(n) \geq h^*(n)$\\
 
 
 \subsubsection{pozresno preiskovanje/ greedy best-first search}
@@ -86,9 +79,10 @@ hevristicna ocena ... npr manhattan distance (zracna razdalja)
 \end{itemize}
 
 \subsubsection{A*}
-Ideja: boljsa hevrisiticna fun\\
-Vozlisca vrednotimo glede na ceno najboljse poti skozi vozlisce n\\
-$f(n)=g(n)+h(n)$, $g(n)$ cena poti do n (znano), $h(n)$ cena od n do najblizjega cilja (ocena)\\
+A* is informed version of \textbf{dijkstra} (uses heuristics and pq)\\
+Vozlisca vrednotimo: $f(n)=g(n)+h(n)$\\ 
+$g(n)$ cena poti do n (znano),\\ 
+$h(n)$ cena od n do najblizjega cilja (ocena)\\
 \textbf{prioritetna vrsta} (max glede na f(n))
 Basically dijkstra + h(n) (A* is basically an informed variation of Dijkstra.
 )
@@ -98,17 +92,9 @@ Basically dijkstra + h(n) (A* is basically an informed variation of Dijkstra.
     \item \textbf{casovna zahtevnost} $O(b^m)$, kjer je m najvecja globina drevesa
 \end{itemize}
 
-h(n) je \textbf{dopustna} ce nikoli \textbf{ne precenjuje cene do cilja}\\
-- hevristika optimisticna predvideva da je do cilja manj kot dejansko je (zracna razdalja, igra 8 ploscic)\\
-- $\forall h(n)\leq h*(n)$, kjer je $h*(n)$ dejanska cena optimalne poti do cilja za vozlisce n
-- h(n) = 0 (A* = dijkstra), preiskovanje s cenami, velja da je sevedno optimalen
-
 
 \subsubsection{IDA* (Iterative deepening A*)}
-Deluje kot \textbf{dfs}, vendar za mejo uporabljamo \textbf{f(n)} namest globine
-- za mejo na zacetku izberemo vrednost f(n) zacetnega v
-- na vsaki iteraciji razvijemo vsa vozlisca z f(n) <= mejni vrednosti
-- za naslednjo iteracijo izberemo mejo, ki je najmanjsi f(n) od se nerazvitih vozlisc
+DFS with heuristics and iterative bound (value)\\
 
 \includegraphics[width=6cm]{./images/ida*.png}
 
@@ -185,4 +171,59 @@ Algoritem:\\
 - izberi k optimalnih stanj od sosedov aktualnih stanj\\
 - ponavaljaj do ustavitnega pogoja 
 
-\subsection{Grafi AND/OR, nedeterministicno okolje}
+\subsection{preiskovanje grafov AND/OR, nedeterministicno okolje}
+Pomagajo resevati probleme z \textbf{dekompozicijo na manjse probleme}
+Uporabnost:
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item princip deli in vladaj
+    \item iskanje v nedeterministicnih okoljih 
+    \item igre med dvema nasprotnikoma s popolno informacijo (sah, dama)
+    \item ekspertno resevanje problem
+\end{itemize}
+Primer graf dekompozicja v dva manjsa problema skozi g in f\\
+\textbf{Resitveno drevo} je resitev AND/OR grafov\\
+\includegraphics[width=6cm]{./images/resitveno-drevo.png}
+\subsubsection{AO*}
+Vozlisce \textbf{OR}: Razvijamo najbolj obetavno poddrevo, dokler njegova cena ne preseze alternativnega poddrevesa
+Konec (AND vozlisca imajo v vsaki veji resitev, OR pa vsaj v eni)
+
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item posplositev A* na grafe AND/OR
+    \item \textbf{popoln in optimalen} $\Leftrightarrow$ h(n) ne precenjuje dejanske cene do cilja
+\end{itemize}
+
+Vsako vozlisce N ima:
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item lokalno (dinamicno) \textbf{hevristicno oceno} \green{H(N)}
+    \item lokalno (dinamico) vrednost \textbf{kriterijske funkcije} \green{F(N)}
+    G(N) cena od predhodnika do trenutnega vozlisca
+    $$F(N_i)=G(N_i)+H(N_i)=\textbf{cena}(N_{i-1},N_i)+H(N_i)$$
+\end{itemize}
+Dinamicna hevristicna ocena H(N) je \textbf{odvisna od tipa vozlisca}:
+\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+    \item za \green{liste}:
+        \item H(N) = h(n)
+        \item F(N) = G(N) + H(N) = cena(stars,N) + h(n)
+    \item za \green{notranja vozlisca}:\\
+    \includegraphics[width=6cm]{ao+.png}
+\end{itemize}
+\subsubsection{Preiskovanje v nedeterministicnem okolju:}
+\textbf{Nedeterministican akcija} - ista akcija lahko obrodi razlicna ciljna stanja\\
+Do resitve ni vec \textbf{poti} temvec \textbf{drevesa} (uporbljamo AND/OR grafe)\\
+Vozsilca OR \textbf{mozne akcije}, vozlisca AND \textbf{vejanja v mozna stanja}, ki so rezultat nedeterministicnih akcij
+
+\subsection{Preiskovanje brez informacij o stanju}
+Okolja smo razdelili na \textbf{transparent} (agent lahko zazna popolno informacija) in \textbf{netransparentna} (brez informacije o stanju)\\
+Kej ce imamo opravka z netraspranetim okoljem?\\
+- izvajamo preiskovanje prostora \textbf{verjetnih} stanj in ne prostora \textbf{dejanskih} stanj\\
+- izvajamo s postokopom omejevanja moznozsti kandidatnih stanj\
+
+\subsection{Igranje iger}
+
+\subsubsection{Predstavitev problema}
+
+\subsubsection{algoritem MINIMAX}
+- m globina
+- b 
+
+\subsubsection{Rezanje alfa-beta}
