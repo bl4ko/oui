@@ -1,3 +1,26 @@
 \section{Sklepanje}
 
 \subsection{Bayesovske mreze}
+
+Baye. mreza = Usmerjen graf, kjer so podane zahtevane verjetnosti:
+\begin{itemize}[leftmargin=*,topsep=0pt,noitemsep]
+    \item Za vozlisca \textbf{brez starsev} verjetnosti $P(v_i)$
+    \item Za vozlisca z \textbf{starsi} pogojne verjetnosti vseh kombinacij starsev
+\end{itemize}
+
+\includegraphics[width=6cm]{images/bayesovska_mreza.png}
+
+Pravila verjetnostnega sklepanja:
+\begin{enumerate}[leftmargin=*,topsep=0pt,noitemsep]
+    \item \textbf{Konjunkcija}: $P(X_1 X_2 \mid C) = P(X_1 \mid C) P(X_2 \mid X_1C)$
+    \item \textbf{Gotov dogodek}: $P(X \mid \dots X \dots) = 1$
+    \item \textbf{Nemogoc dogodek}: $P(X\mid \dots \overline{X} \dots) = 0$
+    \item \textbf{Negacija}: $P(\overline{X} \mid C) = 1 - P(X \mid C)$
+    \item Ce je Y naslednik od X in je Y vsebovan v pogojnem delu: $P(X\mid YC) = P(X\mid C) \cdot \frac{P(Y\mid XC)}{P(Y\mid C)}$
+    \item Ce pogojni del ne vsebuje naslednika od X:
+        \begin{enumerate}[leftmargin=0.1cm,noitemsep,topsep=0pt,label=(\alph*)]
+            \item ce X \textbf{nima} starsev: $P(X\mid C) = P(X)$, P(X) je podan
+            \item ce \textbf{ima} X starse S: $P(X\mid C) = \sum_{S\in P_X} P(X \mid S)P(S\mid C)$
+        \end{enumerate}
+    \item Iz 6b zgoraj: $P(i \mid gc) = P(i \mid g)$
+\end{enumerate}

@@ -7,10 +7,10 @@ Agentu opisemo svet in postavimo fizikalne omejitve.\\
 Ne zagotovalja optimalne resitve, obravnavamo le en cilj naenkrat (ko ga dosezemo, se lahko ostali izgubijo) = Sussmanova anomalija\\
 \green{Akcija} move(X, From, To)
 \begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item \blue{pogoj}: con=[clr(X), on(X,F), clr(T)] $\rightarrow$ pogoji za izvajanje akcije,
-    \item \blue{poz. ucinki}: adds=[on(X, T), clr(F)] $\rightarrow$ nova stanja,
-    \item \blue{neg. ucinki}: dels=[on(X, F), clr(T)] $\rightarrow$ izbrisana stanja,
-    \item \blue{omejitve}: constr=[F $\neq$ T, X$\neq$ F, X$\neq$ T, block(X)] $\rightarrow$ omejitve akcij (fizikalne omejitve),
+    \item pogoj: \blue{cond}=[clr(X), on(X,F), clr(T)] $\rightarrow$ pogoji za izvajanje akcije,
+    \item poz. ucinki: \blue{adds}=[on(X, T), clr(F)] $\rightarrow$ nova stanja,
+    \item neg. ucinki: \blue{dels}=[on(X, F), clr(T)] $\rightarrow$ izbrisana stanja,
+    \item omejitve: \blue{constr}=[F $\neq$ T, X$\neq$ F, X$\neq$ T, block(X)] $\rightarrow$ omejitve akcij (fizikalne omejitve),
 \end{itemize}
 \cyan{Algoritem}:
 \begin{enumerate}[noitemsep,topsep=0pt,leftmargin=*]
@@ -27,7 +27,38 @@ Ne zagotovalja optimalne resitve, obravnavamo le en cilj naenkrat (ko ga dosezem
 
 
 \subsection{PLANIRANJE Z REGRESIRANJEM CILJEV}
-Resitev za sussmanovo anomalijo
+Resitev za sussmanovo anomalijo\\
+Zacnemo v ciljih, regresiramo do zacetka ($G_i \subset S_0$):
 
+\begin{enumerate}[noitemsep,topsep=0pt,leftmargin=*]
+\item $G_{i+1} = G_i \cup \text{cond}(A) - \text{adds}(A)$
+\item \blue{POGOJ}: $G_{i} \cap \text{dels}(A) = \emptyset$
+\item Preveri da ni protislovja (npr. $G_{i+1} = \left[on(b,c), \dots, c(c) \dots\right]$)
+\end{enumerate}
+
+\green{PRIMER}:\\
+$\rightarrow$ zactno\_stanje = [on(a,1), on(b,a), c(b), on(c,3), c(c)]\\
+$\rightarrow$ hocemo da $\text{zacetno\_stanje} \subset G_i$
+\begin{enumerate}[noitemsep,topsep=0pt,leftmargin=*,]
+    \item $G_0$ = [on(a,b), on(b,c)]
+    \begin{itemize}[noitemsep,topsep=0pt,leftmargin=0.5cm]
+        \item \green{on(a,b)}: $A_0=move(a, From, b)$
+        \item From = 1
+        \item POGOJ: $G_0 \cap \text{dels}(A_0) = \emptyset \green{\checkmark}$
+        \item $G_1$ = [on(a,b), on(b,c), c(a), c(b), on(a,1)]-[c(1), on(a,b)] $\green{\checkmark}$
+    \end{itemize}
+    \item $G_1=$[on(b,c),c(a),c(b),on(a,1)]
+    \begin{itemize}[noitemsep,topsep=0pt,leftmargin=0.5cm]
+        \item \green{c(a)}: $A_1=move(X, a, To)$
+        \item X = c, To = 2
+        \item POGOJ: $G_1 \cap \text{dels}(A_1) = \emptyset \green{\checkmark}$
+        \item $G_2$ = [\underline{on(b,c)},c(a),c(b),on(a,1),\underline{c(c)},c(2),on(c,a)]\\ -[c(a), on(c,2)] \xmark (protislovje)
+        \item \green{on(b,c)}: $A_2=move(b, From, c)$
+        \item From = 3
+        \item POGOJ: $G_2 \cap \text{dels}(A_2) = \emptyset \green{\checkmark}$
+        \item $G_2$ = [on(b,c),c(a),c(b),on(a,1),c(c),c(b),on(b,3)] \cmark
+    \end{itemize}
+    \item $G_2$ = ...     
+\end{enumerate}
 \subsection{RAZPOREJANJE OPRAVIL}
 
