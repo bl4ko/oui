@@ -184,29 +184,27 @@ Primer graf dekompozicja v dva manjsa problema skozi g in f\\
 \textbf{Resitveno drevo} je resitev AND/OR grafov\\
 \includegraphics[width=6cm]{./images/resitveno-drevo.png}
 \subsubsection{AO*}
-Vozlisce \textbf{OR}: Razvijamo najbolj obetavno poddrevo, dokler njegova cena ne preseze alternativnega poddrevesa
-Konec (AND vozlisca imajo v vsaki veji resitev, OR pa vsaj v eni)
-
 \begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
     \item posplositev A* na grafe AND/OR
     \item \textbf{popoln in optimalen} $\Leftrightarrow$ h(n) ne precenjuje dejanske cene do cilja
 \end{itemize}
+$F(N) \dots$ ocena za usmerjanje preiskovanja\\ 
+$H(N) \dots$ dinamicna hevristicna ocena\\
+Postopek:
+\begin{enumerate}[noitemsep,topsep=0pt,leftmargin=*]
+    \item Razvij najcenejse vozlisce
+    \begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+        \item ce list in koncno (oznaci), preveri 3. korak, nadaljuj v 1.
+        \item ce list in ni koncno (oznaci) vrednost vozlisca = $\infty$
+    \end{itemize}
+    \item Posodobi vse predhodnike
+    \begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
+        \item v AND starsih, cena starsa = $\sum$ sinov + povezava v
+        \item v OR starsih, cena starsa = min(sinovi) + povezava v
+    \end{itemize}
+    \item Koncaj ko obstaja pot od zacetnega vozlisca, po kateri v AND vozliscih po vseh sinovih prides do cilja, v OR vozliscih v vsaj enem
+\end{enumerate}
 
-Vsako vozlisce N ima:
-\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item lokalno (dinamicno) \textbf{hevristicno oceno} \green{H(N)}
-    \item lokalno (dinamico) vrednost \textbf{kriterijske funkcije} \green{F(N)}
-    G(N) cena od predhodnika do trenutnega vozlisca
-    $$F(N_i)=G(N_i)+H(N_i)=\textbf{cena}(N_{i-1},N_i)+H(N_i)$$
-\end{itemize}
-Dinamicna hevristicna ocena H(N) je \textbf{odvisna od tipa vozlisca}:
-\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item za \green{liste}:
-        \item H(N) = h(n)
-        \item F(N) = G(N) + H(N) = cena(stars,N) + h(n)
-    \item za \green{notranja vozlisca}:\\
-    \includegraphics[width=6cm]{ao+.png}
-\end{itemize}
 \subsubsection{Preiskovanje v nedeterministicnem okolju:}
 \textbf{Nedeterministican akcija} - ista akcija lahko obrodi razlicna ciljna stanja\\
 Do resitve ni vec \textbf{poti} temvec \textbf{drevesa} (uporbljamo AND/OR grafe)\\

@@ -2,7 +2,7 @@
 
 \textbf{plan} zaporedje akcij, ki pripelje od zacetnega do koncnega stanja
 
-\subsection{STRIPS}
+\subsection{Planiranje s sredstvi in cilji (STRIPS)}
 Agentu opisemo svet in postavimo fizikalne omejitve.\\
 Ne zagotovalja optimalne resitve, obravnavamo le en cilj naenkrat (ko ga dosezemo, se lahko ostali izgubijo) = Sussmanova anomalija\\
 \green{Akcija} move(X, From, To)
@@ -26,7 +26,7 @@ Ne zagotovalja optimalne resitve, obravnavamo le en cilj naenkrat (ko ga dosezem
 
 
 
-\subsection{PLANIRANJE Z REGRESIRANJEM CILJEV}
+\subsection{Planiranje z regresiranjem ciljev (STRIPS)}
 Resitev za sussmanovo anomalijo\\
 Zacnemo v ciljih, regresiramo do zacetka ($G_i \subset S_0$):
 
@@ -60,5 +60,5 @@ $\rightarrow$ hocemo da $\text{zacetno\_stanje} \subset G_i$
     \end{itemize}
     \item $G_2$ = ...     
 \end{enumerate}
-\subsection{RAZPOREJANJE OPRAVIL}
+\subsection{RAZPOREJANJE OPRAVIL (PDDL)}
 
