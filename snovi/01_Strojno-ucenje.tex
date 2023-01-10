@@ -10,11 +10,10 @@ Pomembni kriteriji:
     \item \textbf{splosnost} (tocnost za nevidene primere)
     \item \textbf{razumljivost} hipotez
 \end{itemize}
-Ocenjevanje uspesnosti pri klasifikaciji na podlagi njihove \textbf{tocnosti}:\\
-TP - true positive, FP - false positive, FN - false negative, TN - true negative
-$$\text{Klasifikacijska tocnost}=\frac{TP+TN}{TP+TN+FP+FN}=\frac{TP+TN}{N}$$
-Napaka 1. tipa = FP, napaka 2. tipa = FN
-$$\text{Obcutljivost/senzitivnost}=TPR=\frac{TP}{TP+FN}$$
+TP-true positive, FP-false positive, FN-false negative, TN-true negative\\
+$\text{\green{Klasifikacijska tocnost}}=\frac{TP+TN}{TP+TN+FP+FN}=\frac{TP+TN}{N}$\\
+Napaka 1. tipa = FP, napaka 2. tipa = FN:\\
+$\text{\green{Obcutljivost/senzitivnost}}=TPR=\frac{TP}{TP+FN}$
 
 \subsection{Gradnja odlocitvenih dreves}
 \textbf{Informacijski prispevek} $\text{Gain(A)}=I-I_{res}(A)$, I=H(C)
@@ -30,10 +29,14 @@ Pozresen algoritem, ki \textbf{lokalno} izbira najbolsi atribut.\\
 
 \subsubsection{Binarizacija atributov}
 Aleternativa za resevanje problematike z vecvrednostnimi atributi:\\
-Primer: barve $\in$ {rdeca, rumena, zelena, modra}\\
-Strategije, razbijemo v dve mnozici:\\
-- {{rdeca}, {rumena, zelena, modra}}\\
-- {{rdeca, rumena}, {zelena, modra}}\\
+Strategije:
+\begin{itemize}[leftmargin=*,topsep=0pt,noitemsep]
+    \item $\left[\{Y \}, \{R, G, B \} \right]$ (one-vs-all)
+    \item $\left[\{Y, R\}, \{G, B\}\right]$ 
+    \item vpeljava bianrnih atributov za vsako barvo
+\end{itemize}
+Primer B = \{Y, G, R\}, konstruiramo 3 nove binarne atribute:
+$$ \begin{matrix} barva \\ Y \\ G \\ R \end{matrix} \rightarrow \begin{tabular}{c|c|c} Y & G & R \\ \hline 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{tabular}$$
 \textbf{Prednost}: manjse vejanje drevesa.
 
 
