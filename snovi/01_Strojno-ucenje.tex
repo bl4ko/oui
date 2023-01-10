@@ -10,17 +10,16 @@ Pomembni kriteriji:
     \item \textbf{splosnost} (tocnost za nevidene primere)
     \item \textbf{razumljivost} hipotez
 \end{itemize}
-TP-true positive, FP-false positive, FN-false negative, TN-true negative\\
+\green{TP}=true positive, \green{TN}-true negative, \green{FP}-false positive (\blue{napaka 1. tipa}), \green{FN}-false negative (\blue{napaka 2. tipa}) \\
 $\text{\green{Klasifikacijska tocnost}}=\frac{TP+TN}{TP+TN+FP+FN}=\frac{TP+TN}{N}$\\
-Napaka 1. tipa = FP, napaka 2. tipa = FN:\\
 $\text{\green{Obcutljivost/senzitivnost}}=TPR=\frac{TP}{TP+FN}$
 
 \subsection{Gradnja odlocitvenih dreves}
-\textbf{Informacijski prispevek} $\text{Gain(A)}=I-I_{res}(A)$, I=H(C)
-$$I_{\text{res}}=-\sum_{v_i\in A}p_{v_i}\sum_c p(c|v_i)\log_2p(c|v_i)$$
-Za koliko se entropija zmanjsa po delitvi z Atributom A.\\
+Za koliko se entropija zmanjsa po delitvi z Atributom A:\\
+\textbf{Informacijski prispevek}: $\text{\green{Gain(A)}}=I-I_{res}(A)$, I=H(C)\\
+$\green{I_{\text{res}}}=-\sum_{v_i\in A}p_{v_i}\sum_c p(c|v_i)\log_2p(c|v_i)$\\
 \textbf{Razmerje inofrmacijskega prispevka atributa A}:\\ 
-$\text{IGR(A)}=\frac{\text{Gain(A)}}{\text{H(A)}}$\\
+$\text{\green{IGR(A)}}=\frac{\text{Gain(A)}}{\text{H(A)}}$
 
 
 \subsubsection{TDIDT (Top down induction decision tree) algoritem}
@@ -40,7 +39,6 @@ $$ \begin{matrix} barva \\ Y \\ G \\ R \end{matrix} \rightarrow \begin{tabular}{
 \textbf{Prednost}: manjse vejanje drevesa.
 
 
-
 \subsection{Ucenje iz sumnih podatkov (rezanje)}
 \green{tocnost t}...verjetnost pravilnosti klasifikacije\\
 \green{napaka e} $\dots$ $1-t$\\
@@ -49,7 +47,8 @@ $$ \begin{matrix} barva \\ Y \\ G \\ R \end{matrix} \rightarrow \begin{tabular}{
 $m \dots$ koliko zaupam apriorni verjetnosti\\
 $p_a$ apriorna verjetnost (domenski ekspert lahko pove)\\
 \green{Laplacova ocena verjetnosti} $p=\frac{n+1}{N+k}$\\
-k...stevilo vseh moznih razredov\\
+k...stevilo vseh moznih razredov
+
 \subsubsection{REP (reduced error prunning)} 
 Dela dobro ce imamo veliko rezalno mnozico.\\
 Obicajno uporabljamo relativno frekvenco za ocenjevanje verjetnosti.\\
