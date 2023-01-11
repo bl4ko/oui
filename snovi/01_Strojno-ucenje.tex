@@ -35,7 +35,7 @@ Aleternativa za resevanje problematike z vecvrednostnimi atributi:\\
     \item vpeljava bianrnih atributov za vsako barvo
 \end{itemize}
 Primer B = \{Y, G, R\}, konstruiramo 3 nove binarne atribute:
-$$ \begin{matrix} barva \\ Y \\ G \\ R \end{matrix} \rightarrow \begin{tabular}{c|c|c} Y & G & R \\ \hline 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{tabular}$$
+$ \begin{matrix} barva \\ Y \\ G \\ R \end{matrix} \rightarrow \begin{tabular}{c|c|c} Y & G & R \\ \hline 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{tabular}$
 \textbf{Prednost}: manjse vejanje drevesa.
 
 
@@ -49,6 +49,13 @@ $p_a$ apriorna verjetnost (domenski ekspert lahko pove)\\
 \green{Laplacova ocena verjetnosti} $p=\frac{n+1}{N+k}$\\
 k...stevilo vseh moznih razredov
 
+\subsubsection{MEP (Minimal Error Prunning)}
+e...staticna napaka,E...vzvratna napaka,$\green{e\leq E} \rightarrow$ rezemo poddrevo\\
+\includegraphics[width=6cm]{./images/mep.png}\\
+(Laplace)\\
+$e_L(d)=1-t=1-\frac{13+1}{20+2}=0.363$\\
+$E_L(d)=12/20\cdot e_L(d_l) + 8/20\cdot e_L(d_d)= \frac{12}{20} \cdot(1-\frac{7+1}{12+2})+\frac{8}{20}(1-\frac{13+1}{20+2})$\\
+
 \subsubsection{REP (reduced error prunning)} 
 Dela dobro ce imamo veliko rezalno mnozico.\\
 Obicajno uporabljamo relativno frekvenco za ocenjevanje verjetnosti.\\
@@ -58,12 +65,6 @@ $G(v)\geq 0 \Rightarrow$ rezemo podrevo\\
 $e(C)=3$\\
 $e_T=2+3=5$\\
 $G(C)=5-3=2\geq0 \rightarrow \text{rezemo}$
-\subsubsection{MEP (Minimal Error Prunning)}
-e...staticna napaka,E...vzvratna napaka,$e\leq E \rightarrow$ rezemo poddrevo\\
-\includegraphics[width=6cm]{./images/mep.png}\\
-(Laplace)\\
-$e_L(d)=1-t=1-\frac{13+1}{20+2}=0.363$\\
-$E_L(d)=12/20\cdot e_L(d_l) + 8/20\cdot e_L(d_d)= \frac{12}{20} \cdot(1-\frac{7+1}{12+2})+\frac{8}{20}(1-\frac{13+1}{20+2})$\\
 
 
 \subsection{Ocenjevanje uspesnosti modelov}
