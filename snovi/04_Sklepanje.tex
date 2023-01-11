@@ -31,9 +31,12 @@ Ce so podani \textbf{starsi}, \textbf{otroci} in \textbf{starsi otrok}, je vozli
 \includegraphics[width=6cm]{images/ovojnica-markova.png}
 
 \subsection{D-locevanje}
-Ce sta A in B dve vozlisci v mrezi, sta ti vozlisci \textbf{neodvisni} $\Leftrightarrow$ obstaja mnozica vozlisc E, ki d-locuje A in B (\green{$P(A|EB)=P(A|E)$})\\
-Mnozica E \green{d-locuje} vozlisci A in B, ce obstaja taksno podano vozlisce X na vsaki poti med A in B, da blokira to pot. Vozlisce X blokira pot
-na enega od naslednjih nacinov:
+
+A in B v mrezi sta \textbf{neodvisni} $\Leftrightarrow$ obstaja mnozica vozlisc E, ki d-locuje A in B, potem sledi:  (\green{$P(A|EB)=P(A|E)$})\\
+\includegraphics[width=6.5cm]{images/d-locevanje-algoritem.png}
+\includegraphics*[width=7cm]{images/d-locevanje-nacini.png}
 
 Primer d-locevanje vozlisc c in d\\
-\includegraphics*[width=6cm]{images/primer-d-locevanje.png}
+\includegraphics*[width=6cm]{images/primer-d-locevanje.png}\\
+$\rightarrow$ P(d|c\blue{a})=P(d|a), P(d|c\blue{b})=P(d|b), P(d|c\blue{ab})=P(d|ab),\\
+P(d|c\blue{be})=P(d|be),P(d|c\blue{abe})=P(d|abe)

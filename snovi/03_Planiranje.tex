@@ -35,8 +35,6 @@ Zacnemo v ciljih, regresiramo do zacetka ($G_i \subset S_0$):
 \item \blue{POGOJ}: $G_{i} \cap \text{dels}(A) = \emptyset$
 \item Preveri da ni protislovja (npr. $G_{i+1} = \left[on(b,c), \dots, c(c) \dots\right]$)
 \end{enumerate}
-
-\green{PRIMER}:\\
 $\rightarrow$ zactno\_stanje = [on(a,1), on(b,a), c(b), on(c,3), c(c)]\\
 $\rightarrow$ hocemo da $\text{zacetno\_stanje} \subset G_i$
 \begin{enumerate}[noitemsep,topsep=0pt,leftmargin=*,]
@@ -70,22 +68,20 @@ Razsirimo lahko notacijo (PDDL):\\
 \textbf{CONSUME} opredeljuje (trajno) porabo dolocene kolicine resursov\\
 \textbf{USE} opredeljuje (zacasno) zasedenost kolicine resursov med izvajanjem akcije\\
 \includegraphics[width=7cm]{./images/pddl.png}
-\textbf{Metoda kriticne poti}
+\textbf{Metoda kriticne poti}\\
+kriticna pot: pot, ki je \textbf{najdaljsa} in doloca dolzino trajanja celotnega plana
+vsaki akciji priredimo par \textbf{[ES, LS]}
 \begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
-    \item kriticna pot: pot, ki je \textbf{najdaljsa} in doloca dolzino trajanja celotnega plana
-    \item vsaki akciji priredimo par \textbf{[ES, LS]}
+    \item \textbf{ES}: najbolj zgodnji mozen zacetek (Earliest Start)
     \begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
-        \item \textbf{ES}: najbolj zgodnji mozen zacetek (Earliest Start)
-        \begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
-            \item $ES(start) = 0$, $\quad ES(B) = \max\limits_{A \prec B} \left[ ES(A) + Duration(A)\right]$
-        \end{itemize}
-        \item \textbf{LS}: najbolj pozen mozen zacetek (Latest Start)
-        \begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
-            \item LS(Finish) = ES(Finish), $LS(A) = \min\limits_{A\prec B}\left[ LS(B) - Duration(A)\right]$
-        \end{itemize}
+        \item $ES(start) = 0$, $\quad ES(B) = \max\limits_{A \prec B} \left[ ES(A) + Duration(A)\right]$
     \end{itemize}
-    \item \green{rezerva(slack)}=LS-ES (\textbf{casovna rezerva})
+    \item \textbf{LS}: najbolj pozen mozen zacetek (Latest Start)
+    \begin{itemize}[leftmargin=*,noitemsep,topsep=0pt]
+        \item LS(Finish) = ES(Finish), $LS(A) = \min\limits_{A\prec B}\left[ LS(B) - Duration(A)\right]$
+    \end{itemize}
 \end{itemize}
-Opravila dolocamo po hevristiki: \textbf{minimum slack} $\rightarrow$ na iteraciji ima prednost akcija 
-ki ima izpolnjene predhodnike in najnizji slack, nato posodobi [ES in LS] za celotni graf in ponovi
+\green{rezerva(slack)}=LS-ES (\textbf{casovna rezerva})
+\blue{Algoritem} po \textbf{hevristiki \green{minimum slack}} $\rightarrow$ na vsaki iteraciji ima prednost akcija 
+ki ima izpolnjene predhodnike in najnizji slack, nato posodobi [ES in LS] za celotni graf in ponovi.
 
