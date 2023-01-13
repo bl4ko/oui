@@ -38,13 +38,6 @@ Motivacija: \\
     Vozlisce (Si, Ei) je v dvosmernem prostur ciljo vozlisce ce velja E=S (soda dolzina na isto mesto pridemo iz obeh strani) ali S->E (liha pot sosednja)
 \end{itemize}
 
-\subsubsection{cenovno - optimalno iskanje}
-\begin{itemize}[noitemsep,leftmargin=*,topsep=0pt]
-    \item posplositev iskanja v sirino (iskanje v sirino je optimalno, ce so cene vseh povezav enake 1)\\
-    \item dijkstra basically (sam do zadnga noda)
-    \item https://stackoverflow.com/a/14587449
-\end{itemize}
-
 
 \subsection{Informirani preiskovalni algoritmi}
 
@@ -83,32 +76,22 @@ Basically dijkstra + h(n) (A* is basically an informed variation of Dijkstra.
 
 
 \subsubsection{IDA* (Iterative deepening A*)}
-DFS with heuristics and iterative bound (value)\\
+\begin{tabular}{c|c|c|c}
+    F (meja) & R & Generirana & DFS (list)\\
+    \hline
+    0 & / & s(7) & /\\
+    \hline
+    7 & / & s(7) & s \\
+      & s & a(8) b(7) c(7) & b, c\\
+      & b & f(6) h(5) & f h c\\
+      & f & g(7) h(9) i(11) & g h c\\
+      & \underline{g} &  & 
+\end{tabular}
 
-\includegraphics[width=6cm]{./images/ida*.png}
-
-\textbf{Ucinkovitost}
-\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item neucinkovit ce vozlisca raznolika f(n)
-    \item prednost: ne hrani vec vseh vozlisc kot A*
-    \item optimalen: ce razvija v prioritetnem vrsntem redu, h(n) mora biti \textbf{monotona|konsistentna} (h(n) skos pada) (posledicno tudi dopustna) $$h(n) \leq c(n,n') + h(n')$$ (h naslednjega vozlisca manjsi ker je blizji cilja)
-    \item $\text{monotona} \rightarrow \text{dopustna}$ (proti primer h(n) = 0)
-\end{itemize}
 
 
 \subsubsection{Kakovost hevristicnih funkcij}
-$$\begin{array}{|c|c|c|}
-    \hline
-    7 & 2 & 4 \\
-    \hline 
-    5 & & 6 \\
-    \hline 
-    8 & 3 & 1 \\
-    \hline 
-\end{array}\\$$
-Primer igra 8 ploscic\\
--$h_1$: stevilo ploscic ki niso na pravem mestu (8)\\
--$h_2$: vsota manhattanskih razdalj ploscic do pravega mesta(3+1+2+2+2+3+3+2=18)\\
+
 Kakovost h ocenimo z:\\
 - stevilom generirarnih vozlisc\\
 - z efektivnim faktorjem vejanja (koliko vozlisc N je algoritem generiral da je na globini d nasel resitev)\\
