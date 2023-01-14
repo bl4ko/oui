@@ -1,3 +1,3 @@
 # OUI Cheatsheet
 
-![cheatsheet](./cheatsheet.pdf)
+- [cheatsheet](./cheatsheet.pdf)
