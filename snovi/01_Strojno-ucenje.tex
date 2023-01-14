@@ -145,6 +145,19 @@ Poveze po podobnosti med primeri, primer zacne kot samostojna gruca, na koncu vs
 2. Izracunamo ketri centroid je najblizji vsakemu primeru.\\
 3. Izracunamo nove centre gruc = $\frac{1}{|G|}\sum\limits_{i\in G} x_i$\\
 4. Ponovimo korake 2 in 3 dokler se centri ne premaknejo.\\
+V mnozici tock A(3,1),B(1,2),C(3,4),D(5,2),E(1), manhattanska razdalja, zacetni vrednosti centroidov C1(4,4) in C2(5,4).\\
+\begin{tabular}{c|c|c|c}
+    Tocka & d(X,C1) & d(X,C2) & Gruca\\
+    \hline
+    A & 4 & 5 & C1\\ 
+    B & 5 & 6 & C1\\
+    C & 1 & 2 & C1\\
+    D & 3 & 2 & C2\\
+    E & 6 & 7 & C1\\
+    \hline
+\end{tabular}\\
+V naslednji iteraciji sta koordinati centroidov:\\
+$C1=(\frac{3+1+3+1}{4},\frac{1+2+4+1}{4})=(2,2)$ \; in \; $C2=D=(5,2)$ ...
 
 \subsection{Spodbujevalno ucenje - reinforcement learning}
 Inteligentni agent se uci iz zaporedja \textbf{nagrad} in \textbf{kazni}
