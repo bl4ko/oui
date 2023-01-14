@@ -5,12 +5,7 @@
 \subsubsection{Iskanje v sirino}
 
 \subsubsection{iskanje v globino}
-
-Izboljsave:
-\begin{itemize}
-    \item \textbf{Iskanje s sestopanjem}
-    \item \textbf{depth-limited-search} (vnapej definiramo globino l (dolocimo preko domenskega znanja))
-\end{itemize}
+Izboljsave (\textbf{Iskanje s sestopanjem, iterativno poglabljanje})
 
 \subsubsection{iterativno poglabljanje}
 problem gobinsko omejenega iskanja -> nastavitev meje l
@@ -23,13 +18,9 @@ Mejo l postopoma povecujemo za 1, dokler ne najdemo resitve.
     \item \textbf{prostorska zahtevnost} $O(bd)$
 \end{itemize}
 Boljse od iskanja v globino/sirino
-
 \subsubsection{dvosmerno iskanje}
-Ideja: pognati vzporedni iskanji od zacetka do cilja in od cilja do zacetka.\\
-Motivacija: \\ 
-
-\textbf{Implemenatcija dvosmernega iskanja}
-
+Pozenemo vzporedni iskanji od zacetka do cilja in od cilja do zacetka.\\
+\textbf{Implemenatcija dvosmernega iskanja}:
 \begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
     \item ciljno vozlisce mora biti znano
     \item originalni problemski prostor preslikamo v dvosmerni prosto stanj
@@ -37,7 +28,6 @@ Motivacija: \\
     (S,E) -> {(S1, E1), (S1,E2), (S2, E1), (S2, E2)...}
     Vozlisce (Si, Ei) je v dvosmernem prostur ciljo vozlisce ce velja E=S (soda dolzina na isto mesto pridemo iz obeh strani) ali S->E (liha pot sosednja)
 \end{itemize}
-
 
 \subsection{Informirani preiskovalni algoritmi}
 Ideja: preiskovanje usmerjamo z dodatnim znanjem \textbf{hevristiko} (ocenitvena funkcija za obetavnost vozlisca)\\
@@ -77,14 +67,10 @@ f(n) = g(n) + h(n), g(n)=cena poti do n\\
       & \underline{g} &  & 
 \end{tabular}
 
-
-
 \subsubsection{Kakovost hevristicnih funkcij}
-
 Kakovost h ocenimo z \textbf{stevilom generiranih vozlisc} ter \textbf{efektivnim faktorjem vejanja} (N vozlisc je algoritem generiral da je na globini d nasel resitev)\\
 Hocemo imeti dopustne hevristike s \textbf{cim visjimi vrednostmi} in \textbf{sprejelmjivo ceno} (casom izracuna)\\
-Ce $h_2(n) \geq h_1(n), \forall n$ potem $h_2$ \textbf{dominira} $h_1$\\
-
+Ce $h_2(n) \geq h_1(n), \forall n$ potem $h_2$ \textbf{dominira} $h_1$
 
 \subsection{preiskovanje grafov AND/OR, nedeterministicno okolje}
 Pomagajo resevati probleme z \textbf{dekompozicijo na manjse probleme}

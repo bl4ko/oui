@@ -35,7 +35,7 @@ Aleternativa za resevanje problematike z vecvrednostnimi atributi:\\
     \item $\left[\{Y, R\}, \{G, B\}\right]$ 
     \item vpeljava bianrnih atributov za vsako barvo
 \end{itemize}
-Primer B = \{Y, G, R\}, konstruiramo 3 nove binarne atribute:
+Primer B = \{Y, G, R\}, konstruiramo 3 nove binarne atribute:\\
 $ \begin{matrix} barva \\ Y \\ G \\ R \end{matrix} \rightarrow \begin{tabular}{c|c|c} Y & G & R \\ \hline 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{tabular}$
 \textbf{Prednost}: manjse vejanje drevesa.
 
@@ -62,10 +62,7 @@ Ucna mnozica: 70\% za gradnjo, 30\% za rezanje (z rezanjem odstranimo poddrevesa
 G(v)=st. napacnih klasifikacij v poddrevesu - st. napacnih klasifikacij v korenu poddrevesa\\
 $G(v)\geq 0 \Rightarrow$ rezemo podrevo\\
 \includegraphics[width=6.5cm]{./images/rep.png}\\
-$e(C)=3$\\
-$e_T=2+3=5$\\
-$G(C)=5-3=2\geq0 \rightarrow \text{rezemo}$
-
+$e(C)=3$,\;\;\; $e_T=2+3=5$,\;\;\; $G(C)=5-3=2\geq0 \rightarrow \text{rezemo}$
 
 \subsection{Ocenjevanje uspesnosti modelov}
 \green{tocnost t} $\dots$ verjetnost pravilnosti klasifikacije\\
@@ -107,14 +104,12 @@ $$
 $$
 
 \subsubsection{Nomogragmi}
-Ciljni razred $C=c_T$
-$$X_{X_i=x_j}=\ln \left( \frac{P(X_i=x_j|C=c_T)}{P(X_i=x_j|C=\overline{c_T})} \right)$$
+Ciljni razred $C=c_T$\\
+$X_{X_i=x_j}=\ln \left( \frac{P(X_i=x_j|C=c_T)}{P(X_i=x_j|C=\overline{c_T})} \right)$
 
 \subsection{K-najblizjih sosedov}
-\includegraphics[width=6cm]{./images/knn.png}\\
+\includegraphics[width=6cm]{./images/knn.png}
 
-
-\section{Vrste ucenja}
 \subsection{Nadzorovano ucenje (supervised learning)}
 \textbf{Ucni primeri so podani/oznaceni} kot \textbf{vrednosti vhodov in izhodov}.\\
 $(\vec{x}_1,\vec{y}_1),(\vec{x}_2,\vec{y}_2),\dots,(\vec{x}_N,\vec{y}_N)$\\
@@ -127,10 +122,8 @@ Locimo dve vrsti problemov:
 \end{enumerate}
 
 \subsubsection{Lokalno utezena regresija}
-$$h(\vec{x}_?) = \frac{\sum\limits_{i=1}^k w_i\cdot f(\vec{x}_i)}{\sum\limits_{i=1}^k w_i}, \: w_i(d) ... \text{utez}$$
-\includegraphics[width=7cm]{./images/lokalno-utezena-regresija.png}\\
-
-
+$h(\vec{x}_?) = \frac{\sum\limits_{i=1}^k w_i\cdot f(\vec{x}_i)}{\sum\limits_{i=1}^k w_i}, \: w_i(d) ... \text{utez}$\\
+\includegraphics[width=7cm]{./images/lokalno-utezena-regresija.png}
 
 \subsubsection{Regresijska drevesa}
 Linearna regresija je poseben primer regresijskega drevesa.\\
@@ -145,8 +138,7 @@ Poveze po podobnosti med primeri, primer zacne kot samostojna gruca, na koncu vs
 \textbf{Dendrogram}: drevo, ki predstavlja grucenje.\\
 \textbf{Single-linkage}: povezava med grucami je najkrajse razdalje med primeroma iz razlicnih gruc.\\
 \textbf{Complete-linkage}: povezava med grucami je najdaljsa razdalja med primeroma iz razlicnih gruc.\\
-\textbf{Average-linkage}: povezava med grucami je povprecna razdalja med primeroma iz razlicnih gruc.\\
-
+\textbf{Average-linkage}: povezava med grucami je povprecna razdalja med primeroma iz razlicnih gruc.
 
 \subsubsection{K-means}
 1. V prostor dodamo k centroidov, ki predstavljajo gruce.\\
@@ -158,20 +150,4 @@ Poveze po podobnosti med primeri, primer zacne kot samostojna gruca, na koncu vs
 Inteligentni agent se uci iz zaporedja \textbf{nagrad} in \textbf{kazni}
 
 \subsection{Ocenjevanje ucenja}
-
-\subsubsection{Precno preverjanje}
-Poseben primer \textbf{veckratnega ucenja} in testiranja\\
-\textbf{k-kratno precno preverjanje}
-\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt,partopsep=0pt]
-    \item celo ucno mnozico razbij na k disjunktnih podmnozic
-    \item za vsako od k podmnozic:
-    \begin{itemize}[leftmargin=*,noitemsep,topsep=0pt,partopsep=0pt]
-        \item uporabi \textbf{mnozico} kot \textbf{testno mnozico}
-        \item uporabi \textbf{preostalih k-1} mnozic kot \textbf{ucno mnozico}
-    \end{itemize}
-    \item povpreci dobljenih k ocen tocnosti v koncno oceno
-\end{itemize}
-Pri precnem preverjanju uporabimo vse podatke za testiranje in vse za ucenje\\
-Metoda \textbf{leave one out} je poseben primer precnega preverjanja\\
-Imamo dve hipotezi A in B. Izkase se, da A bolje napoveduje na ucnih podatkih
-B pa na testnih. Potem je B verjetno boljsa hipoteza.
+\textbf{k-fold}, celo ucno mnozico razbij na k disjunktnih podmnozic za vsako od k podmnozic uporabi mnozico kot testno mnozico, preostalih k-1 mnozic kot ucno mnozico.
