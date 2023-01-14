@@ -76,17 +76,16 @@ $t_{L1}=\frac{2+1}{3+3}=0.5$,
 $t_{L2}=\frac{4+1}{7+3}=0.5$,
 $t_{L3}=\frac{2+1}{2+3}=0.6$\\
 tocnost drevesa: $t_D=3/12\cdot 0.5 + 7/12\cdot 0.5 + 2/12\cdot 0.6=0.5167$\\
-\includegraphics[width=6cm]{./images/klasifikacijska-napaka.png}\\
-$e=1-(P(B=0)P(R=0|B=0)+P(B=1)P(R=1|B=1))$\\
-
+\includegraphics[width=2cm]{./images/klasifikacijska-napaka.png}\\
+$e=1-(P(B=0)P(R=0|B=0)+P(B=1)P(R=1|B=1))$
 
 \subsection{Obravnanva mankajocih atributov, navini Bayesov klasifikator}
 \subsubsection{Naivni bayes}
-Ce poznamo razred, kam klasificiramo ce nepoznamo atributov:
-$$\text{Klasifikator: }\text{argmax}_{c\in C} P(c)\prod_{i=1}^n P(x_i|c)$$
+Ce poznamo razred, kam klasificiramo ce nepoznamo atributov:\\
+\textbf{Klasifikator}: \text{argmax}$_{c\in C} P(c)\prod\limits_{i=1}^n P(x_i|c)$\\
 $c\dots \text{razred}$, $x_i\dots \text{atributi}$\\
-Verjetnost::
-$$P(C=c|x_1,\dots,x_n)=\frac{P(C=c)P(X_1=x_i|C=c)P(X_2=x_j|C=c)\dots}{P(X_1=x_i)P(X_2=x_j)\dots}$$
+Verjetnost::\\
+$P(C=c|x_1,\dots,x_n)=\frac{P(C=c)P(X_1=x_i|C=c)P(X_2=x_j|C=c)\dots}{P(X_1=x_i)P(X_2=x_j)\dots}$\\
 
 \text{Primer moski}: $\text{visina}\geq175, \text{teza}\geq 65, \text{spol}=M$
 $$

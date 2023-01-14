@@ -40,9 +40,7 @@ Motivacija: \\
 
 
 \subsection{Informirani preiskovalni algoritmi}
-
-\subsubsection{Hevristicno preiskovanje - Hevristika}
-ideja: preiskovanje usmerjamo z dodatnim znanjem \textbf{hevristika} je ocenitvena funkcija za obetavnost vozlisca\\
+Ideja: preiskovanje usmerjamo z dodatnim znanjem \textbf{hevristiko} (ocenitvena funkcija za obetavnost vozlisca)\\
 - \green{optimisticna/dopustna}: $\forall n: \bm{h(n) \leq h^*(n)}$ ($h^*$ je optimalna ocena)\\
 - \green{optimalna}: $h(n) = h^*(n)$\\
 - \green{pesimisticna}: $h(n) \geq h^*(n)$
@@ -88,48 +86,6 @@ Hocemo imeti dopustne hevristike s \textbf{cim visjimi vrednostmi} in \textbf{sp
 Ce $h_2(n) \geq h_1(n), \forall n$ potem $h_2$ \textbf{dominira} $h_1$\\
 
 
-\subsection{Lokalno preiskovalni algoritmi}
-
-\subsubsection{Plezanje na hrib}
-Ne pomnemo poti do cilja, ampak samo trenutno stanje\\
-Koristni v primerih:\\
-- ce nas zanima samo kakovost resitve (in ne pot do cilja)\\
-- resevanje optimizacijskih problemov (kjer je podana \textbf{kriterijska funkcija} za oceno kakovosti resitve)\\
-
-Prednosti:\\
-- majhna poraba prostora\\
-
-\textbf{Primer 4 kraljice na sahovnici}
-- kriterijska funkcija: maksimiziramo - (minus) stevilo kraljic, ki se medsebojno napadajo
-
-Tezave:
-\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item lokalni maksimumi
-    \item "rame, plaote" (kriterijska funkcija konstantna vrednost)
-    \item grebeni (za plezanje navzgor je potreben sestop po pobocju grebena)
-\end{itemize}
-
-Resevanje iz lokalnih maksimumov:
-\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item \textbf{koraki vstran}: ce ima naslednje stanje isto vrednost kriterijske funkcie, dovolimo premik v to stanje
-    \item \textbf{stohasticno} plezanje na hrib: iz mnozice boljsih stanj, verjetnostno izberemo naslednje stanje (pri cemer upostevamo da imajo boljsa stanja vecjo verjetnost izbora)
-    \item \textbf{nakljucni ponovni zagon}: veckrat pozeni plezanje na hrib iz nakljucnih stanj dokler ne najdes resitve
-\end{itemize}
-
-\subsubsection{Simulirano ohlajanje}
-algoritem ki izvira iz metalurgije (ko je jeklo tekoce, so molekule v njem bolj gibljive; ko se ohlaja se strjuje in molekuele se umirjajo)
-Analogija:\\
-- generiramo nakljucne sosede trenutnega stanja\\
-- ce najdemo \textbf{boljse stanje ga izberemo}\\
-- ce najdemo \textbf{slabse stanje, ga izberemo z doloceno verjetnostjo}\\
-- verjetnost izbire neoptimalnega stanja s casom pada (nizanje temperature)
-
-\subsubsection{Lokalno iskanje v snopu}
-Algoritem:\\
-- v spominu hrani k aktualnih stanj namesto enega\\
-- izberi k optimalnih stanj od sosedov aktualnih stanj\\
-- ponavaljaj do ustavitnega pogoja 
-
 \subsection{preiskovanje grafov AND/OR, nedeterministicno okolje}
 Pomagajo resevati probleme z \textbf{dekompozicijo na manjse probleme}
 Uporabnost:
@@ -139,16 +95,12 @@ Uporabnost:
     \item igre med dvema nasprotnikoma s popolno informacijo (sah, dama)
     \item ekspertno resevanje problem
 \end{itemize}
-Primer graf dekompozicja v dva manjsa problema skozi g in f\\
-\textbf{Resitveno drevo} je resitev AND/OR grafov\\
-\includegraphics[width=6cm]{./images/resitveno-drevo.png}
 \subsubsection{AO*}
 \begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
     \item posplositev A* na grafe AND/OR
     \item \textbf{popoln in optimalen} $\Leftrightarrow$ h(n) ne precenjuje dejanske cene do cilja
 \end{itemize}
-$F(N) \dots$ ocena za usmerjanje preiskovanja\\ 
-$H(N) \dots$ dinamicna hevristicna ocena\\
+$F(N)$ ocena za usmerjanje preiskovanja, $H(N)$ dinamicna hevristicna ocena\\
 Postopek:
 \begin{enumerate}[noitemsep,topsep=0pt,leftmargin=*]
     \item Razvij najcenejse vozlisce
@@ -163,21 +115,6 @@ Postopek:
     \end{itemize}
     \item Koncaj ko obstaja pot od zacetnega vozlisca, po kateri v AND vozliscih po vseh sinovih prides do cilja, v OR vozliscih v vsaj enem
 \end{enumerate}
-
-\subsubsection{Preiskovanje v nedeterministicnem okolju:}
-\textbf{Nedeterministican akcija} - ista akcija lahko obrodi razlicna ciljna stanja\\
-Do resitve ni vec \textbf{poti} temvec \textbf{drevesa} (uporbljamo AND/OR grafe)\\
-Vozsilca OR \textbf{mozne akcije}, vozlisca AND \textbf{vejanja v mozna stanja}, ki so rezultat nedeterministicnih akcij
-
-\subsection{Preiskovanje brez informacij o stanju}
-Okolja smo razdelili na \textbf{transparent} (agent lahko zazna popolno informacija) in \textbf{netransparentna} (brez informacije o stanju)\\
-Kej ce imamo opravka z netraspranetim okoljem?\\
-- izvajamo preiskovanje prostora \textbf{verjetnih} stanj in ne prostora \textbf{dejanskih} stanj\\
-- izvajamo s postokopom omejevanja moznozsti kandidatnih stanj\
-
-\subsection{Igranje iger}
-
-\subsubsection{Predstavitev problema}
 
 \subsubsection{algoritem MINIMAX}
 - m globina
