@@ -136,9 +136,46 @@ V listih regresijskega drevesa vcasih napovemo kar povprecno vrednost.
 \subsubsection{Hierarhicno grucenje}
 Poveze po podobnosti med primeri, primer zacne kot samostojna gruca, na koncu vsi primeri pripadajo eni gruci\\
 \textbf{Dendrogram}: drevo, ki predstavlja grucenje.\\
-\textbf{Single-linkage}: povezava med grucami je najkrajse razdalje med primeroma iz razlicnih gruc.\\
-\textbf{Complete-linkage}: povezava med grucami je najdaljsa razdalja med primeroma iz razlicnih gruc.\\
-\textbf{Average-linkage}: povezava med grucami je povprecna razdalja med primeroma iz razlicnih gruc.
+\textbf{Single-linkage}: povezava med grucami je najkrajsa razdalje med primeroma iz razlicnih gruc.\\
+\textbf{Complete-linkage}: najdaljsa razdalja med primeroma iz razlicnih gruc.\\
+\textbf{Average-linkage}: povprecna razdalja med primeroma iz razlicnih gruc.\\
+Tocke A(3,1),B(1,2),C(3,4),D(5,2),E(1,1), manhattan, complete linkage:
+\begin{tabular}{c|ccccc}
+    & A & B & C & D & E\\
+    \hline
+    A & 0 & 3 & 3 & 3 & 2\\
+    B &   & 0 & 4 & 4 & \underline{1}\\
+    C &   &   & 0 & 4 & 5\\
+    D &   &   &   & 0 & 5\\
+    E &   &   &   &   & 0\\
+\end{tabular}
+$\rightarrow$
+\begin{tabular}{c|cccc}
+    & A & BE & C & D\\
+    \hline
+    A & 0 & \underline{3} & 3 & 3\\
+    BE &   & 0 & 5 & 5\\
+    C &  &   & 0 & 4\\
+    D &   &   &   & 0\\
+\end{tabular}
+$\rightarrow$
+\begin{tabular}{c|ccc}
+    & ABE & C & D\\
+    \hline
+    ABE & 0 & 5 & 5\\
+    C &   & 0 & \underline{4}\\
+    D &   &   & 0\\
+\end{tabular}
+$\rightarrow$
+\begin{tabular}{c|cc}
+    & ABE & CD\\
+    \hline
+    ABE & 0 & 5\\
+    CD &   & 0\\
+\end{tabular}
+
+
+    
 
 \subsubsection{K-means}
 1. V prostor dodamo k centroidov, ki predstavljajo gruce.\\
