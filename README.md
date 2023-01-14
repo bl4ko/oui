@@ -1,3 +1,3 @@
 # OUI Cheatsheet
 
-<!-- TODO -->
+![cheatsheet](./cheatsheet.pdf)
