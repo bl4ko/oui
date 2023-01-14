@@ -41,43 +41,34 @@ Motivacija: \\
 
 \subsection{Informirani preiskovalni algoritmi}
 
-\subsubsection{hevristicno preiskovanje}
-ideja: preiskovanje usmerjamo z dodatnim znanjem (ocenitven funcija za obetavnost vozlisca)\\
-\textbf{hevristika} je ocenitvena funkcija za obetavnost vozlisca\\
-- \green{optimisticna/dopustna}: $h(n) \leq h^*(n)$ ($h^*$ je optimalna ocena)\\
+\subsubsection{Hevristicno preiskovanje - Hevristika}
+ideja: preiskovanje usmerjamo z dodatnim znanjem \textbf{hevristika} je ocenitvena funkcija za obetavnost vozlisca\\
+- \green{optimisticna/dopustna}: $\forall n: \bm{h(n) \leq h^*(n)}$ ($h^*$ je optimalna ocena)\\
 - \green{optimalna}: $h(n) = h^*(n)$\\
-- \green{pesimisticna}: $h(n) \geq h^*(n)$\\
-
-
-\subsubsection{pozresno preiskovanje/ greedy best-first search}
-$h(n)$ hevristicna ocena\\
-vrednotenje vozlisca $f(n)=h(n)$
-hevristicna ocena ... npr manhattan distance (zracna razdalja)
-
-\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item \textbf{popolnost} (ali najde vedno resitev): Ne
-    \item \textbf{optimalnost}: Ne
-    \item \textbf{casovna zahtevnost} $O(b^m)$, kjer je m najvecja globina drevesa
-\end{itemize}
+- \green{pesimisticna}: $h(n) \geq h^*(n)$
 
 \subsubsection{A*}
-A* is informed version of \textbf{dijkstra} (uses heuristics and pq)\\
-Vozlisca vrednotimo: $f(n)=g(n)+h(n)$\\ 
-$g(n)$ cena poti do n (znano),\\ 
-$h(n)$ cena od n do najblizjega cilja (ocena)\\
-\textbf{prioritetna vrsta} (max glede na f(n))
-Basically dijkstra + h(n) (A* is basically an informed variation of Dijkstra.
-)
-\begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
-    \item \textbf{popolnost}: Da (ce ustreza pogoju \underline{dopustnosti})
-    \item \textbf{optimalnost}: Da (ce ustreza pogoju \underline{dopustnosti}) 
-    \item \textbf{casovna zahtevnost} $O(b^m)$, kjer je m najvecja globina drevesa
-\end{itemize}
-
+A* is informed version of \textbf{dijkstra} (uses heuristics and pq), ce h(dopustna)=\textbf{popolna in optimalna}\\
+\textbf{Casovna zahtevnost} odvisna od hevristike: $E = (h^* - h)/h^*$, $O(b^{E \cdot d})$, b-stopnja vejanja, d-globina optimalne resitve\\ 
+\textbf{Prostorska zahtevnost} \textbf{problem} (hrani vsa vozlisca v spominu)\\
+\includegraphics[width=3cm]{./images/graf-a.png}\\
+$f(n)=g(n)+h(n)$, g(n) cena do vozlisca, h(n) hevristika\\
+Razvijamo dokler ne pridemo do ciljnega vozlisca\\
+\begin{tabular}{c|c|c}
+    Razvijano & Generirana & Priority Queue\\
+    \hline
+    / & a(4) & [] \\
+    a & b(7) c(6) & $\left[ c(6), b(7)\right]$\\
+    c & b'(11) g(12) h(8) & [b(7),h(8),b'(11),g(12)]\\
+    b & c'(4) d(8) e(5) & [c'(4),e(5),h(8),d(8),b'(11),g(12)]\\
+    \dots & \dots & \dots\\
+    \magenta{f} & &
+\end{tabular}
 
 \subsubsection{IDA* (Iterative deepening A*)}
+f(n) = g(n) + h(n), g(n)=cena poti do n\\
 \begin{tabular}{c|c|c|c}
-    F (meja) & R & Generirana & DFS (list)\\
+    Meja & Razvijano & Generirana & DFS (list)\\
     \hline
     0 & / & s(7) & /\\
     \hline
@@ -92,13 +83,9 @@ Basically dijkstra + h(n) (A* is basically an informed variation of Dijkstra.
 
 \subsubsection{Kakovost hevristicnih funkcij}
 
-Kakovost h ocenimo z:\\
-- stevilom generirarnih vozlisc\\
-- z efektivnim faktorjem vejanja (koliko vozlisc N je algoritem generiral da je na globini d nasel resitev)\\
-
-\includegraphics[width=6cm]{./images/kakovost-h(n).png}
-
-Vidimo $h_2(n) \geq h_1(n) \forall n$ pravimo $h_2$ \textbf{dominira} $h_1$\\
+Kakovost h ocenimo z \textbf{stevilom generiranih vozlisc} ter \textbf{efektivnim faktorjem vejanja} (N vozlisc je algoritem generiral da je na globini d nasel resitev)\\
+Hocemo imeti dopustne hevristike s \textbf{cim visjimi vrednostmi} in \textbf{sprejelmjivo ceno} (casom izracuna)\\
+Ce $h_2(n) \geq h_1(n), \forall n$ potem $h_2$ \textbf{dominira} $h_1$\\
 
 
 \subsection{Lokalno preiskovalni algoritmi}
