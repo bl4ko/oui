@@ -46,7 +46,7 @@ $ \begin{matrix} barva \\ Y \\ G \\ R \end{matrix} \rightarrow \begin{tabular}{c
 \green{relativna frekvenca} $p=\frac{n}{N}$\\
 \green{m-ocena} $p=\frac{n + p_a * m}{N+m}$\\
 $m \dots$ koliko zaupam apriorni verjetnosti\\
-$p_a$ apriorna verjetnost (domenski ekspert lahko pove)\\
+$p_a$ apriorna verjetnost (pove domenski ekspert) (v nasem primeru relativna frekvenca)\\
 \green{Laplacova ocena verjetnosti} $p=\frac{n+1}{N+k}$\\
 k...stevilo vseh moznih razredov
 
@@ -84,21 +84,20 @@ $c\dots \text{razred}$, $x_i\dots \text{atributi}$\\
 Verjetnost::\\
 $P(C=c|x_1,\dots,x_n)=\frac{P(C=c)P(X_1=x_i|C=c)P(X_2=x_j|C=c)\dots}{P(X_1=x_i)P(X_2=x_j)\dots}$\\
 
-\text{Primer moski}: $\text{visina}\geq175, \text{teza}\geq 65, \text{spol}=M$
+
+Primer pritisk, vreme, razred glavobol
 $$
 \begin{array}{|c|c|c|}
     \hline
-    X\backslash Y   & \text{Razred A}      & \text{Razred B}\\
+    X\backslash Y   & \text{ne}      & \text{da}\\
     \hline
-    p_a           & P(A) = \frac{2}{3}    & P(B) = \frac{1}{3}\\
+    P(G)           & P(G=da) = \frac{5}{9}    & P(G=ne) = \frac{4}{9}\\
     \hline
-    \text{spol}   & P(M|A) & P(M|B)\\
+    \text{P(P=srednji)}   & P(P=sre.|G=ne)=\frac{1}{5} & P(P=sre.|G=da)=\frac{2}{4}\\
     \hline
-    \text{visina} & P(V\geq 175|A) & P(V\geq 175 | B)\\
+    \text{P(V=dezevno)} & P(V=dez|G=ne)=\frac{1}{5} & P(V=dez|G=da)=\frac{2}{4}\\
     \hline
-    \text{teza} & P(T\geq 65|A) & P(T\geq 65| B)\\
-    \hline
-    P(y)\prod\limits_{i=1}^n P(x_i|y) & \dots & \dots\\
+    P(y)\prod\limits_{i=1}^n P(x_i|y) & \frac{5}{9}\cdot\frac{1}{5}\cdot\frac{1}{5} & \frac{4}{9}\cdot\frac{2}{4}\cdot\frac{2}{4}\\
     \hline
 \end{array}
 $$

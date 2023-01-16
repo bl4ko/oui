@@ -20,16 +20,11 @@ Ne zagotovalja optimalne resitve, obravnavamo le en cilj naenkrat (ko ga dosezem
     \item Izvedi akcijo (ki izopolni najvec pogojev)
     \item Ce obstajajo nereseni cilji $\Rightarrow$ 1.
 \end{enumerate}
-\magenta{Primer dfs, zlaganje kock}
-
+\magenta{Primer dfs, zlaganje kock}\\
 \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=6.5cm]{strips.png}
-
-
-
 \subsection{Planiranje z regresiranjem ciljev (STRIPS)}
 Resitev za sussmanovo anomalijo\\
 Zacnemo v ciljih, regresiramo do zacetka ($G_i \subset S_0$):
-
 \begin{enumerate}[noitemsep,topsep=0pt,leftmargin=*]
 \item $G_{i+1} = G_i \cup \text{cond}(A) - \text{adds}(A)$
 \item \blue{POGOJ}: $G_{i} \cap \text{dels}(A) = \emptyset$
@@ -59,8 +54,7 @@ $\rightarrow$ hocemo da $\text{zacetno\_stanje} \subset G_i$
     \item $G_2$ = ...     
 \end{enumerate}
 
-
-\subsection{RAZPOREJANJE OPRAVIL (PDDL)}
+\subsection{RAZPOREJANJE OPRAVIL PDDL)}
 Razsirimo lahko notacijo (PDDL):\\
 \textbf{Akcija1 $\green{\prec}$ Akcija2}: Akcija1 se mora zgoditi pred Akcijo2\\
 \textbf{Resources} podajo stevila razpolozljivih resursov\\
@@ -84,4 +78,5 @@ vsaki akciji priredimo par \textbf{[ES, LS]}
 \green{rezerva(slack)}=LS-ES (\textbf{casovna rezerva})
 \blue{Algoritem} po \textbf{hevristiki \green{minimum slack}} $\rightarrow$ na vsaki iteraciji ima prednost akcija 
 ki ima izpolnjene predhodnike in najnizji slack, nato posodobi [ES in LS] za celotni graf in ponovi.
-
+\subsection{Preiskovanje brez informacije o stanju}
+belief states - graf, zacetna stanja = potencna mnozica vseh stanj, konec samo koncno stanje

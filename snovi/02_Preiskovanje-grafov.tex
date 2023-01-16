@@ -101,9 +101,14 @@ Postopek:
     \end{itemize}
     \item Koncaj ko obstaja pot od zacetnega vozlisca, po kateri v AND vozliscih po vseh sinovih prides do cilja, v OR vozliscih v vsaj enem
 \end{enumerate}
-
 \subsubsection{algoritem MINIMAX}
-- m globina
-- b 
-
+$O(n^d)$
 \subsubsection{Rezanje alfa-beta}
+V najblsem primeru zmansa iz $O(b^{m \cdot d})$ na $O(b^{m \cdot d/2})$\\
+\subsection{Lokalno preiskovalni algoritmi}
+plezanje na hrib, simulirano ohlajanje, gen.algoritmi...
+\subsubsection{Lokalno iskanje v snopu}
+generiraj k nakljucnih zacetnih stanj\\
+iz vsakegea generiraj sosede\\
+izberi k najboljsih naslednikov\\
+ponavljaj (iz maksimum stohasticno iskanje -> 1-verjetnost/sumvseh)
