@@ -54,7 +54,7 @@ $\rightarrow$ hocemo da $\text{zacetno\_stanje} \subset G_i$
     \item $G_2$ = ...     
 \end{enumerate}
 
-\subsection{RAZPOREJANJE OPRAVIL PDDL)}
+\subsection{RAZPOREJANJE OPRAVIL PDDL}
 Razsirimo lahko notacijo (PDDL):\\
 \textbf{Akcija1 $\green{\prec}$ Akcija2}: Akcija1 se mora zgoditi pred Akcijo2\\
 \textbf{Resources} podajo stevila razpolozljivih resursov\\
@@ -79,4 +79,9 @@ vsaki akciji priredimo par \textbf{[ES, LS]}
 \blue{Algoritem} po \textbf{hevristiki \green{minimum slack}} $\rightarrow$ na vsaki iteraciji ima prednost akcija 
 ki ima izpolnjene predhodnike in najnizji slack, nato posodobi [ES in LS] za celotni graf in ponovi.
 \subsection{Preiskovanje brez informacije o stanju}
-belief states - graf, zacetna stanja = potencna mnozica vseh stanj, konec samo koncno stanje
+belief states - graf, zacetna stanja = potencna mnozica vseh stanj, konec samo koncno stanje\\
+Podan je majhen labirin iz treh sob (A,B,C). V labirintu se nahaja robot, ki mora 
+priti v sobo \textbf{C}. Vendar pa robot nima senzorja za zaznavo v kateri sobi se nahaja
+zato mora brez informacije o stanju poiskati akcije ki ga bodo zagotovo pripeljale na cilj.
+Izvede lahko akcije U, D, L in R
+\includegraphics[width=\columnwidth]{images/nedeterministicno-preiskovanje.png}

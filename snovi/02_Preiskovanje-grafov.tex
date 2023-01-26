@@ -1,11 +1,31 @@
 \section{Preiskovanje}
-
 \subsection{Neinformirani preiskovalni algoritmi}
-
-\subsubsection{Iskanje v sirino}
-
-\subsubsection{iskanje v globino}
+\includegraphics[width=\columnwidth]{images/neinformirano-preiskovanje.png}
+\subsubsection{Iskanje v globino}
+Cikle crtamo...\\
+\begin{tabular}{c|c|c}
+    Razvijano & Generirano & DFS list\\
+    \hline
+    / & a & a\\
+    a & b c & b c \\
+    b & c' d e & c' d e c\\
+    c' & (b') g h & g h c' d e c\\
+    g & f h' & f h' g h c' d e c\\
+    \green{f} & koncno & koncno
+\end{tabular}\\
 Izboljsave (\textbf{Iskanje s sestopanjem, iterativno poglabljanje})
+\subsubsection{iskanje v sirino}
+\begin{tabular}{c|c|c}
+Razvijano & Generirana & Vrsta\\
+\hline
+a & b c & [b,c]\\
+b & c' d e & [c,c',d,e]\\
+c & b' g h & [c',d,e,b',g,h]\\
+c' & (b'') g' h' & [d,e,b',g,h,g',h']\\
+d & / & [e,b',g,h,g',h']\\ 
+\dots\\
+h & koncno & koncno
+\end{tabular}
 
 \subsubsection{iterativno poglabljanje}
 problem gobinsko omejenega iskanja -> nastavitev meje l
@@ -28,8 +48,10 @@ Pozenemo vzporedni iskanji od zacetka do cilja in od cilja do zacetka.\\
     (S,E) -> {(S1, E1), (S1,E2), (S2, E1), (S2, E2)...}
     Vozlisce (Si, Ei) je v dvosmernem prostur ciljo vozlisce ce velja E=S (soda dolzina na isto mesto pridemo iz obeh strani) ali S->E (liha pot sosednja)
 \end{itemize}
-
 \includegraphics[width=\columnwidth]{images/dvosmerno-iskanje.png}
+
+\subsubsection{Primerjave algoritmov}
+\includegraphics[width=\columnwidth]{images/neinformirano_iskanje.png}
 
 \subsection{Informirani preiskovalni algoritmi}
 Ideja: preiskovanje usmerjamo z dodatnim znanjem \textbf{hevristiko} (ocenitvena funkcija za obetavnost vozlisca)\\
@@ -74,7 +96,7 @@ Kakovost h ocenimo z \textbf{stevilom generiranih vozlisc} ter \textbf{efektivni
 Hocemo imeti dopustne hevristike s \textbf{cim visjimi vrednostmi} in \textbf{sprejelmjivo ceno} (casom izracuna)\\
 Ce $h_2(n) \geq h_1(n), \forall n$ potem $h_2$ \textbf{dominira} $h_1$
 
-\subsection{preiskovanje grafov AND/OR, nedeterministicno okolje}
+\subsection{Nedeterministicno okolje}
 Pomagajo resevati probleme z \textbf{dekompozicijo na manjse probleme}
 Uporabnost:
 \begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
@@ -83,6 +105,7 @@ Uporabnost:
     \item igre med dvema nasprotnikoma s popolno informacijo (sah, dama)
     \item ekspertno resevanje problem
 \end{itemize}
+
 \subsubsection{AO*}
 \begin{itemize}[noitemsep,topsep=0pt,leftmargin=*]
     \item posplositev A* na grafe AND/OR
@@ -103,10 +126,17 @@ Postopek:
     \end{itemize}
     \item Koncaj ko obstaja pot od zacetnega vozlisca, po kateri v AND vozliscih po vseh sinovih prides do cilja, v OR vozliscih v vsaj enem
 \end{enumerate}
+\includegraphics[width=\columnwidth]{images/nedeterminizem_ao2.png}\\
+\includegraphics[width=\columnwidth]{images/nedeterminizm_ao.png}
+
 \subsubsection{algoritem MINIMAX}
 $O(n^d)$
 \subsubsection{Rezanje alfa-beta}
-V najblsem primeru zmansa iz $O(b^{m \cdot d})$ na $O(b^{m \cdot d/2})$\\
+V najbolsem primeru zmansa iz $O(b^{m \cdot d})$ na $O(b^{m \cdot d/2})$\\
+V max vozliscih popravljamo \textbf{alfa}\\
+V min vozliscih popravljamo \textbf{beta}\\
+Iz vozlisca na otroke prenesamo par [alfa, beta]\\
+\includegraphics[width=\columnwidth]{images/alpha_beta_prunning.png}
 \subsection{Lokalno preiskovalni algoritmi}
 plezanje na hrib, simulirano ohlajanje, gen.algoritmi...
 \subsubsection{Lokalno iskanje v snopu}
@@ -114,3 +144,14 @@ generiraj k nakljucnih zacetnih stanj\\
 iz vsakegea generiraj sosede\\
 izberi k najboljsih naslednikov\\
 ponavljaj (iz maksimum stohasticno iskanje -> 1-verjetnost/sumvseh)
+\includegraphics[width=\columnwidth]{images/lokalno_iskanje_v_snopu.png}
+\blue{PRIMER:} resujemo problem iskanja izhoda iz hodnika, ki ga sestavljajo 4 sobe.
+V eni izmed sob se nahaja robot, ki se lahko na vsakem koraku premakne za 1 sobo v (L) ali
+v (D). Problem resujemo s preiskovanjem v snopu, ki na vsakem koraku hrani 2 aktualni stanji.\\
+\includegraphics[width=\columnwidth]{images/iskanje_v_snopu.png}
+\subsubsection{Resevanje iz lokalnih maksimumov}
+\textbf{Koraki vstran}: ce ima naslendje stanje isto vrednost kriterijske funkcije, dovolimo premik
+v to stanje\\
+\textbf{Stohasticno} plezanje na hrib; iz mnozice boljsih stanj, verjetnstno izberemo naslednje stanje (pri 
+cemer upostevamo, da imajo boljsa stanja vecjo verjetnost izbora)\\
+\textbf{Nakljucni ponovni zagon}: veckrat pozeni plezanje na hrib 
