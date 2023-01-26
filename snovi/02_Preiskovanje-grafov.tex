@@ -29,6 +29,8 @@ Pozenemo vzporedni iskanji od zacetka do cilja in od cilja do zacetka.\\
     Vozlisce (Si, Ei) je v dvosmernem prostur ciljo vozlisce ce velja E=S (soda dolzina na isto mesto pridemo iz obeh strani) ali S->E (liha pot sosednja)
 \end{itemize}
 
+\includegraphics[width=\columnwidth]{images/dvosmerno-iskanje.png}
+
 \subsection{Informirani preiskovalni algoritmi}
 Ideja: preiskovanje usmerjamo z dodatnim znanjem \textbf{hevristiko} (ocenitvena funkcija za obetavnost vozlisca)\\
 - \green{optimisticna/dopustna}: $\forall n: \bm{h(n) \leq h^*(n)}$ ($h^*$ je optimalna ocena)\\
@@ -39,7 +41,7 @@ Ideja: preiskovanje usmerjamo z dodatnim znanjem \textbf{hevristiko} (ocenitvena
 A* is informed version of \textbf{dijkstra} (uses heuristics and pq), ce h(dopustna)=\textbf{popolna in optimalna}\\
 \textbf{Casovna zahtevnost} odvisna od hevristike: $E = (h^* - h)/h^*$, $O(b^{E \cdot d})$, b-stopnja vejanja, d-globina optimalne resitve\\ 
 \textbf{Prostorska zahtevnost} \textbf{problem} (hrani vsa vozlisca v spominu)\\
-\includegraphics[width=3cm]{./images/graf-a.png}\\
+\includegraphics[width=\columnwidth]{./images/graf-a.png}\\
 $f(n)=g(n)+h(n)$, g(n) cena do vozlisca, h(n) hevristika\\
 Razvijamo dokler ne pridemo do ciljnega vozlisca\\
 \begin{tabular}{c|c|c}

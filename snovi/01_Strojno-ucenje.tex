@@ -1,11 +1,8 @@
 \section{Strojno ucenje}
 
-
-\subsection{Problemski prostor, ocenjevanje znanja}
-
 \subsection{Evalviranje hipotez}
 Pomembni kriteriji:
-\begin{itemize}[leftmargin=*,labelindent=0pt,labelwidth=0pt,itemsep=0pt,parsep=0pt,topsep=0pt]
+\begin{itemize}
     \item \textbf{konsistentnost} hipotez z primeri (ucnimi)
     \item \textbf{splosnost} (tocnost za nevidene primere)
     \item \textbf{razumljivost} hipotez
@@ -13,19 +10,6 @@ Pomembni kriteriji:
 \green{TP}=true positive, \green{TN}-true negative, \green{FP}-false positive (\blue{napaka 1. tipa}), \green{FN}-false negative (\blue{napaka 2. tipa}) \\
 $\text{\green{Klasifikacijska tocnost}}=\frac{TP+TN}{TP+TN+FP+FN}=\frac{TP+TN}{N}$\\
 $\text{\green{Obcutljivost/senzitivnost}}=TPR=\frac{TP}{TP+FN}$
-
-\subsection{Gradnja odlocitvenih dreves}
-Za koliko se entropija zmanjsa po delitvi z Atributom A:\\
-\textbf{Informacijski prispevek (najbolj informativni atribut maksimizira informacijski prispevek minimizira} $I_{res}$:\\
-$\text{\green{Gain(A)}}=H(A)-H_{res}(A)$\\
-$\green{H_{\text{res}}(A)}=-\sum\limits_{a_i\in A}p(A=a_i)\sum\limits_{c_i\in C} p(C=c_i|A=a_i)\log_2p(C=c_i|A=a_i)$\\
-\textbf{Razmerje inofrmacijskega prispevka atributa A}:\\ 
-$\text{\green{IGR(A)}}=\frac{\text{Gain(A)}}{\text{H(A)}}$
-
-
-\subsubsection{TDIDT (Top down induction decision tree) algoritem}
-Pozresen algoritem, ki \textbf{lokalno} izbira najbolsi atribut.\\
-- kratkoviden algoritem
 
 \subsubsection{Binarizacija atributov}
 Aleternativa za resevanje problematike z vecvrednostnimi atributi:\\
@@ -39,8 +23,34 @@ Primer B = \{Y, G, R\}, konstruiramo 3 nove binarne atribute:\\
 $ \begin{matrix} barva \\ Y \\ G \\ R \end{matrix} \rightarrow \begin{tabular}{c|c|c} Y & G & R \\ \hline 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{tabular}$
 \textbf{Prednost}: manjse vejanje drevesa.
 
+\subsection{Gradnja odlocitvenih dreves}
+Drevo gradimo tako da v vsakem koraku izberemo atribut, ki
+najvec zmanjsa entropijo (ima najvecji informacijski prispevek).\\
+\textbf{Rezidualna entropija} (najbolsi atribut -> najnizja)\\
+$\green{H_{\text{rez}}(A)}=-\sum\limits_{a_i\in A}p(A=a_i)\sum\limits_{c_i\in C} p(C=c_i|A=a_i)\log_2p(C=c_i|A=a_i)$\\
+\textbf{Informacijski prispevek} (najboljsi atribut maksimizira)\\
+$\text{\green{Gain(A)}}=H(\text{Class})-H_{rez}(A)$\\
+\textbf{Razmerje inofrmacijskega prispevka atributa A}:\\ 
+$\text{\green{IGR(A)}}=\frac{\text{Gain(A)}}{\text{H(A)}}$\\
+\includegraphics[width=\columnwidth]{./images/decision_tree.png}\\
+$H(G)=-\frac{5}{9}\log_2\frac{5}{9}-\frac{4}{9}\log_2\frac{4}{9}=-0.991$\\
+$H_{rez}(V)=\frac{3}{9}\left(H(1/3, 2/3)\right) + \frac{6}{9}\left(H(4/6, 2/6)\right)=-0.918$\\
+$H_{rez}(P)=\frac{4}{9}\left(H(1/4, 3/4)\right) + \frac{3}{9}\left(H(2/3, 1/3)\right) + \frac{2}{9}\left(H(1/2, 1/2)\right)=0.89$\\
+$H_{rez}(P)< H_{rez}(V) \rightarrow$ \textbf{P}ritisk je najboljsi atribut z njim naprej delimo...\\
+
+\subsubsection{TDIDT (Top down induction decision tree) algoritem}
+Pozresen algoritem, ki \textbf{lokalno} izbira najbolsi atribut.\\
+- kratkoviden algoritem\\
+\includegraphics[width=\columnwidth]{images/decision_tree2.png}\\
+\textbf{Nizek pritisk} nismo delili naprej, saj nimamo nobenega primera
+ki bi imel nizek pritisk in dezevno vreme (samo soncno). Ce bi delili bi
+dobili razreda soncno: [3, 1] in dezevno: [0, 0] kar nebi imelo smisla.
 
 \subsection{Ucenje iz sumnih podatkov (rezanje)}
+Ucna mnozico razbijemo na: 70\% za gradnjo, 30\% za rezanje. 
+\green{Z rezanjem} odstranimo poddrevesa, ki niso kriticna 
+in so redundantna tako \textbf{zmansamo velikost drevesa}.\\
+
 \green{tocnost t}...verjetnost pravilnosti klasifikacije\\
 \green{napaka e} $\dots$ $1-t$\\
 \green{relativna frekvenca} $p=\frac{n}{N}$\\
@@ -51,29 +61,28 @@ $p_a$ apriorna verjetnost (pove domenski ekspert) (v nasem primeru relativna fre
 k...stevilo vseh moznih razredov
 
 \subsubsection{MEP (Minimal Error Prunning)}
-e...staticna napaka,E...vzvratna napaka,$\green{e\leq E} \rightarrow$ rezemo poddrevo\\
-\includegraphics[width=6cm]{./images/mep.png}\\
-(Laplace)\\
+\green{e}=staticna napaka, \green{E}=vzvratna napaka, $\green{e\leq E} \rightarrow$ rezemo poddrevo\\
+\includegraphics[width=\columnwidth]{./images/mep.png}\\
+Primer z (Laplace)\\
 $e_L(d)=1-t=1-\frac{13+1}{20+2}=0.363$\\
 $E_L(d)=12/20\cdot e_L(d_l) + 8/20\cdot e_L(d_d)= \frac{12}{20} \cdot(1-\frac{7+1}{12+2})+\frac{8}{20}(1-\frac{13+1}{20+2})$\\
 
 \subsubsection{REP (reduced error prunning)} 
-Ucna mnozica: 70\% za gradnjo, 30\% za rezanje (z rezanjem odstranimo poddrevesa, ki niso kriticna in so redundantna tako zmansamo velikost drevesa)\\
 G(v)=st. napacnih klasifikacij v poddrevesu - st. napacnih klasifikacij v korenu poddrevesa\\
 $G(v)\geq 0 \Rightarrow$ rezemo podrevo\\
-\includegraphics[width=6.5cm]{./images/rep.png}\\
+\includegraphics[width=\columnwidth]{./images/rep.png}\\
 $e(C)=3$,\;\;\; $e_T=2+3=5$,\;\;\; $G(C)=5-3=2\geq0 \rightarrow \text{rezemo}$
 
 \subsection{Ocenjevanje uspesnosti modelov}
 \green{tocnost t} $\dots$ verjetnost pravilnosti klasifikacije\\
 \green{Laplacova ocena verjetnosti} $p=\frac{n+1}{N+k}$\\
 k...stevilo vseh moznih razredov\\
-\includegraphics[width=6cm]{./images/drevo-laplace.png}\\
+\includegraphics[width=\columnwidth]{./images/drevo-laplace.png}\\
 $t_{L1}=\frac{2+1}{3+3}=0.5$,
 $t_{L2}=\frac{4+1}{7+3}=0.5$,
 $t_{L3}=\frac{2+1}{2+3}=0.6$\\
 tocnost drevesa: $t_D=3/12\cdot 0.5 + 7/12\cdot 0.5 + 2/12\cdot 0.6=0.5167$\\
-\includegraphics[width=2cm]{./images/klasifikacijska-napaka.png}\\
+\includegraphics[width=\columnwidth]{./images/klasifikacijska-napaka.png}\\
 $e=1-(P(B=0)P(R=0|B=0)+P(B=1)P(R=1|B=1))$
 
 \subsection{Obravnanva mankajocih atributov, navini Bayesov klasifikator}
@@ -91,25 +100,34 @@ $$
     \hline
     X\backslash Y   & \text{ne}      & \text{da}\\
     \hline
-    P(G)           & P(G=da) = \frac{5}{9}    & P(G=ne) = \frac{4}{9}\\
+    \text{P(G)}           & \text{P(G=ne) = 5/9}    & P\text{(G=da) = 4/9}\\
     \hline
-    \text{P(P=srednji)}   & P(P=sre.|G=ne)=\frac{1}{5} & P(P=sre.|G=da)=\frac{2}{4}\\
+    \text{P(P=srednji)}   & \text{P(P=sre|G=ne)=1/5} & \text{P(P=sre|G=da)=2/4}\\
     \hline
-    \text{P(V=dezevno)} & P(V=dez|G=ne)=\frac{1}{5} & P(V=dez|G=da)=\frac{2}{4}\\
+    \text{P(V=dezevno)} & \text{P(V=dez|G=ne)=1/5} & \text{P(V=dez|G=da)=2/4}\\
     \hline
-    P(y)\prod\limits_{i=1}^n P(x_i|y) & \frac{5}{9}\cdot\frac{1}{5}\cdot\frac{1}{5} & \frac{4}{9}\cdot\frac{2}{4}\cdot\frac{2}{4}\\
+    P(y)\prod\limits_{i=1}^n P(x_i|y) & \text{5/9}\cdot\text{1/5}\cdot\text{1/5} & \text{4/9}\cdot\text{2/4}\cdot\text{2/4}\\
     \hline
 \end{array}
 $$
 
 \subsubsection{Nomogragmi}
 Ciljni razred $C=c_T$\\
-$X_{X_i=x_j}=\ln \left( \frac{P(X_i=x_j|C=c_T)}{P(X_i=x_j|C=\overline{c_T})} \right)$
+$X_{X_i=x_j}=\ln \left( \frac{\frac{P(C=c_T|X_i=x_j)}{P(C=\overline{c_T}|X_i=x_j)}}{\frac{P(C=c_T)}{P(C=\overline{c_T})}} \right) $\\
+\includegraphics[width=\columnwidth]{images/nomogram.png}\\
+Napisi nomogram za verjetnostno razlago modela za klasificiranje v razred \textbf{bolezen=da}\\
+$X_{D=da}=\ln \left( \frac{\frac{200}{150}}{\frac{320}{260}}\right) = 0.08$\\
+$X_{D=ne}=-0.121$\\
+$X_{S=m}=-0.341$\\
+$X_{S=z}=0.380$\\
+\includegraphics[width=\columnwidth]{images/nomogram2.png}
+Da ima oseba \textbf{bolezen} najbolj pripomoreta, da je 
+oseba \textbf{zenska} in ima \textbf{druzino}.
 
 \subsection{K-najblizjih sosedov}
-\includegraphics[width=6cm]{./images/knn.png}
+\includegraphics[width=\columnwidth]{./images/knn.png}
 
-\subsection{Nadzorovano ucenje (supervised learning)}
+\subsection{Regresija}
 \textbf{Ucni primeri so podani/oznaceni} kot \textbf{vrednosti vhodov in izhodov}.\\
 $(\vec{x}_1,\vec{y}_1),(\vec{x}_2,\vec{y}_2),\dots,(\vec{x}_N,\vec{y}_N)$\\
 $\vec{x}_i\dots$ atributi, $\vec{y}_i\dots$ ciljna spremenljivka\\
@@ -122,13 +140,13 @@ Locimo dve vrsti problemov:
 
 \subsubsection{Lokalno utezena regresija}
 $h(\vec{x}_?) = \frac{\sum\limits_{i=1}^k w_i\cdot f(\vec{x}_i)}{\sum\limits_{i=1}^k w_i}, \: w_i(d) ... \text{utez}$\\
-\includegraphics[width=7cm]{./images/lokalno-utezena-regresija.png}
+\includegraphics[width=\columnwidth]{./images/lokalno-utezena-regresija.png}
 
 \subsubsection{Regresijska drevesa}
 Linearna regresija je poseben primer regresijskega drevesa.\\
 V listih regresijskega drevesa vcasih napovemo kar povprecno vrednost.
 
-\subsection{Nenadzorovano ucenje (unsupervised learning)}
+\subsection{Unsupervised learning}
 \textbf{Ucni primeri niso oznaceni} (nimajo ciljne spremenljivke),
 \textbf{ucimo se vzorcev v podatkih}, (npr. grucenje)
 
@@ -138,7 +156,7 @@ Poveze po podobnosti med primeri, primer zacne kot samostojna gruca, na koncu vs
 \textbf{Single-linkage}: povezava med grucami je najkrajsa razdalje med primeroma iz razlicnih gruc.\\
 \textbf{Complete-linkage}: najdaljsa razdalja med primeroma iz razlicnih gruc.\\
 \textbf{Average-linkage}: povprecna razdalja med primeroma iz razlicnih gruc.\\
-Tocke A(3,1),B(1,2),C(3,4),D(5,2),E(1,1), manhattan, complete linkage:
+Tocke A(3,1),B(1,2),C(3,4),D(5,2),E(1,1), manhattan, complete linkage:\\
 \begin{tabular}{c|ccccc}
     & A & B & C & D & E\\
     \hline

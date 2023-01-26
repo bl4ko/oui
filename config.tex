@@ -1,0 +1,102 @@
+\documentclass[landscape,a4paper]{article}
+% Minimal Font Size
+\usepackage{lmodern}
+\usepackage{scrextend}
+\changefontsizes[5pt]{5pt}
+
+% ----------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[LY1,T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage[nosf]{kpfonts}
+\usepackage[t1]{sourcesanspro}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage[top=2mm,bottom=2mm,left=2mm,right=2mm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+\usepackage{pdfpages}
+\usepackage{enumitem} % itemize without indentation
+\usepackage[makeroom]{cancel} % cross out symbols [https://tex.stackexchange.com/q/75525]
+\usepackage{array} %table
+\usepackage{lipsum}
+\usepackage{multicol}
+\usepackage{easytable}
+\usepackage{bm}
+\setlength{\columnseprule}{0.4pt} % lines between columns
+\usepackage{listings} % https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+\usepackage{color}
+\usepackage{blkarray} %https://tex.stackexchange.com/questions/59517/label-rows-of-a-matrix-by-characters
+\usepackage{graphicx} % Images in doccument
+\usepackage{tabularx}
+% https://tex.stackexchange.com/a/42620
+\usepackage{amssymb}
+\usepackage{pifont} 
+\usepackage{amsmath} % Use \underset: https://tex.stackexchange.com/a/40217
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\graphicspath{ {./images/} }
+
+% \titleformat{\subsubsection}
+% {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% https://tex.stackexchange.com/questions/119866/whats-a-good-way-to-insert-very-few-lines-of-code
+\definecolor{green}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{light_orange}{RGB}{221,117,56}
+\definecolor{cyan}{RGB}{75,255,255}
+\definecolor{magenta}{RGB}{255,0,255}
+% https://tex.stackexchange.com/questions/401750/quick-and-short-command-for-coloring-one-word
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\yellow}[1]{\textcolor{yellow}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\purple}[1]{\textcolor{purple}{#1}}
+\newcommand{\cyan}[1]{\textcolor{cyan}{#1}}
+\newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
+
+% size of titles https://tex.stackexchange.com/questions/59726/change-size-of-section-subsection-subsubsection-paragraph-and-subparagraph-ti
+\usepackage{titlesec}
+\titleformat{\section}
+{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+
+% -- Titles ----------------------------------------------------------
+\titleformat*{\section}{\scshape\huge\bfseries\color{red}}
+\titleformat*{\subsection}{\scshape\Large\bfseries\color{orange}}
+\titleformat*{\subsubsection}{\scshape\normalsize\bfseries\color{light_orange}}
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\titlespacing*{\section}{0pt}{0px}{0px}
+\titlespacing*{\subsection}{0pt}{0px}{0px}
+\titlespacing*{\subsubsection}{0pt}{0px}{0px}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% -- List environments -------------------------------------------
+% Redefine itemize environment
+\setlist[itemize]{topsep = 0pt, leftmargin=*, noitemsep}
+\setlist[enumerate]{topsep = 0pt, leftmargin=*, noitemsep}
